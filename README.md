@@ -5,9 +5,9 @@
 **Open-domain classical homoeopathy, compiled into clean, app-ready JSON.**
 
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](LICENSE)
-[![Books](https://img.shields.io/badge/books-13-blue.svg)](#-the-library)
-[![Rubrics](https://img.shields.io/badge/rubrics-~108k-green.svg)](#-the-library)
-[![Format](https://img.shields.io/badge/format-JSON-orange.svg)](#-schema)
+[![Books](https://img.shields.io/badge/books-13-blue.svg)](
+[![Rubrics](https://img.shields.io/badge/rubrics-~108k-green.svg)](
+[![Format](https://img.shields.io/badge/format-JSON-orange.svg)](
 
 *Free to use. Credit the book authors and the JSON compiler. Corrections welcome.*
 
@@ -57,8 +57,12 @@ working with.
 | [Jahr's Manual, Part I](materia_medica/jahr-materia-medica-1847.json) | G. H. G. Jahr | 1847 | 199 remedies / 26,734 symptoms | 98.7% |
 | [Bell's Therapeutics](materia_medica/bell-therapeutics-1906.json) | James B. Bell | 1906 | 103 remedies / 5,547 symptoms | 97.2% |
 
-> **Kent is also available split by chapter** in [`repertory/kent-1897/`](repertory/kent-1897/)
-> (34 chapter files + `index.json`) for apps that load one chapter at a time.
+> **Kent is provided split by chapter** in [`repertory/kent-1897/`](repertory/kent-1897/)
+> — 34 chapter files + `index.json` — so it loads one chapter at a time. (Its single
+> 21 MB file and a couple of other large files exceed GitHub's per-file upload limit
+> here, so they are shipped as parts: `extremities.json` + `extremities-2.json`, and
+> `jahr-materia-medica-1847.json` + `jahr-materia-medica-1847-2.json`. Concatenate
+> the parts, or download the complete library ZIP from **Releases**.)
 
 ---
 
@@ -67,11 +71,11 @@ working with.
 ```
 .
 ├── repertory/            # Repertory books (rubric -> remedies)
-│   ├── kent-repertory-1897.json
-│   ├── kent-1897/        # Kent split into 34 chapters + index.json
-│   └── ...
+│   ├── kent-1897/        # Kent, split into 34 chapters + index.json
+│   ├── clarke-clinical-1900.json
+│   └── ... (9 more)
 ├── materia_medica/       # Materia Medica books (remedy -> symptoms)
-│   ├── jahr-materia-medica-1847.json
+│   ├── jahr-materia-medica-1847.json   (+ -2.json, part 2)
 │   └── bell-therapeutics-1906.json
 ├── SCHEMA.md             # Field-by-field data model
 ├── CREDITS.md            # Book authors + compiler (please credit)
