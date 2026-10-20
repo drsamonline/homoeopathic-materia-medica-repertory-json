@@ -1,0 +1,196 @@
+abbrev,name
+Acon,Aconitum napellus
+Aconit,Aconitum napellus
+Agar,Agaricus muscarius
+Agn,Agnus castus
+Aloe,Aloe socotrina
+Alum,Alumina
+Am-c,Ammonium carbonicum
+Am-m,Ammonium muriaticum
+Anac,Anacardium orientale
+Ant-c,Antimonium crudum
+Ant-t,Antimonium tartaricum
+Apis,Apis mellifica
+Arg-n,Argentum nitricum
+Arn,Arnica montana
+Ars,Arsenicum album
+Ars-m,Arsenicum metallicum
+Asaf,Asafoetida
+Aur,Aurum metallicum
+Bar-c,Baryta carbonica
+Bell,Belladonna
+Bism,Bismuthum
+Bor,Borax veneta
+Brom,Bromium
+Bry,Bryonia alba
+Cact,Cactus grandiflorus
+Calc,Calcarea carbonica
+Calc-c,Calcarea carbonica
+Calc-p,Calcarea phosphorica
+Camph,Camphora
+Cann-i,Cannabis indica
+Cann-s,Cannabis sativa
+Canth,Cantharis vesicatoria
+Caps,Capsicum annuum
+Carb-ac,Acidum carbolicum
+Carb-an,Carboneum animalis
+Carb-v,Carboneum vegetabile
+Caust,Causticum
+Cham,Chamomilla
+Chel,Chelidonium majus
+Chin,China officinalis
+Chin-sul,Chininum sulphuricum
+Cic,Cicuta virosa
+Cina,Cina maritima
+Cinnb,Cinnabaris
+Cocc,Cocculus indicus
+Coff,Coffea cruda
+Colch,Colchicum autumnale
+Coloc,Colocynthis
+Con,Conium maculatum
+Croc,Crocus sativus
+Cupr,Cuprum metallicum
+Cupr-met,Cuprum metallicum
+Dig,Digitalis purpurea
+Dios,Dioscorea villosa
+Dulc,Dulcamara
+Eup-per,Eupatorium perfoliatum
+Euphr,Euphrasia officinalis
+Ferr,Ferrum metallicum
+Gels,Gelsemium sempervirens
+Glon,Glonoinum
+Graph,Graphites
+Guai,Guaiacum
+Hell,Helleborus niger
+Hep,Hepar sulphuris calcareum
+Hyos,Hyoscyamus niger
+Hyper,Hypericum perforatum
+Ign,Ignatia amara
+Iod,Iodium
+Ipec,Ipecacuanha
+Kali-bi,Kali bichromicum
+Kali-bich,Kali bichromicum
+Kali-c,Kali carbonicum
+Kali-m,Kali muriaticum
+Kreos,Kreosotum
+Lach,Lachesis muta
+Led,Ledum palustre
+Lil-t,Lilium tigrinum
+Lyc,Lycopodium clavatum
+Mag-c,Magnesium carbonicum
+Mag-m,Magnesium muriaticum
+Merc,Mercurius solubilis
+Merc-c,Mercurius corrosivus
+Merc-s,Mercurius solubilis
+Mez,Mezereum
+Nat-c,Natrum carbonicum
+Nat-m,Natrum muriaticum
+Nat-s,Natrum sulphuricum
+Nit-ac,Nitricum acidum
+Nux-m,Nux moschata
+Nux-v,Nux vomica
+Op,Opium
+Petr,Petroleum
+Ph-ac,Phosphoricum acidum
+Pho,Phosphorus
+Phos,Phosphorus
+Plat,Platinum metallicum
+Plb,Plumbum metallicum
+Pod,Podophyllum peltatum
+Psor,Psorinum
+Puls,Pulsatilla pratensis
+Ran-b,Ranunculus bulbosus
+Rhod,Rhododendron chrysanthum
+Rhus-t,Rhus toxicodendron
+Rumx,Rumex crispus
+Ruta,Ruta graveolens
+Sabad,Sabadilla
+Sabin,Sabina
+Sars,Sarsaparilla
+Sec-c,Secale cornutum
+Sel,Selenium
+Sep,Sepia officinalis
+Sil,Silicea terra
+Spig,Spigelia anthelmia
+Spong,Spongia tosta
+Stann,Stannum metallicum
+Staph,Staphisagria
+Stram,Stramonium
+Sulph,Sulphur
+Sul-ac,Sulphuricum acidum
+Tarent,Tarentula hispanica
+Thu,Thuja occidentalis
+Thuya,Thuja occidentalis
+Verat,Veratrum album
+Verat-a,Veratrum album
+Verat-v,Veratrum viride
+Zinc,Zincum metallicum
+Zing,Zingiber officinale
+Natrum mur,Natrum muriaticum
+Natrum carb,Natrum carbonicum
+Natrum sulph,Natrum sulphuricum
+Natrum phos,Natrum phosphoricum
+Natrum ars,Natrum arsenicosum
+Calcarea carb,Calcarea carbonica
+Calcarea phos,Calcarea phosphorica
+Calcarea fluor,Calcarea fluorica
+Calcarea sulph,Calcarea sulphurica
+Magnesia carb,Magnesia carbonica
+Magnesia mur,Magnesia muriatica
+Magnesia sulph,Magnesia sulphurica
+Ammonium carb,Ammonium carbonicum
+Ammonium mur,Ammonium muriaticum
+Kali carb,Kali carbonicum
+Kali bich,Kali bichromicum
+Kali mur,Kali muriaticum
+Kali sulph,Kali sulphuricum
+Kali phos,Kali phosphoricum
+Kali iod,Kali iodatum
+Baryta carb,Baryta carbonica
+Baryta mur,Baryta muriatica
+Carbo veg,Carboneum vegetabile
+Carbo an,Carboneum animalis
+Merc sol,Mercurius solubilis
+Merc cor,Mercurius corrosivus
+Mercurius jod rub,Mercurius jodatus ruber
+Benzoic ac,Benzoicum acidum
+Nitric ac,Nitricum acidum
+Nitri ac,Nitricum acidum
+Phosphoric ac,Phosphoricum acidum
+Phos ac,Phosphoricum acidum
+Sulphuric ac,Sulphuricum acidum
+Sul ac,Sulphuricum acidum
+Mur ac,Muriaticum acidum
+Acetic ac,Aceticum acidum
+Oxalic ac,Oxalicum acidum
+Aurum met,Aurum metallicum
+Cuprum met,Cuprum metallicum
+Ferrum met,Ferrum metallicum
+Plumbum met,Plumbum metallicum
+Argentum met,Argentum metallicum
+Stannum met,Stannum metallicum
+Zincum met,Zincum metallicum
+Antimonium crud,Antimonium crudum
+Antimonium tart,Antimonium tartaricum
+Argentum nit,Argentum nitricum
+Arsenicum alb,Arsenicum album
+Arsenicum met,Arsenicum metallicum
+Lilium tig,Lilium tigrinum
+Eupatorium perf,Eupatorium perfoliatum
+Ptelea tri,Ptelea trifoliata
+Apocynum can,Apocynum cannabinum
+Cannabis ind,Cannabis indica
+Hydrastis can,Hydrastis canadensis
+Kreosotum,Kreosotum
+Hepar sulph,Hepar sulphuris calcareum
+Plumbum iod,Plumbum iodatum
+Dioscorea vil,Dioscorea villosa
+Rhus tox,Rhus toxicodendron
+Rhus ven,Rhus venenata
+Rumex cris,Rumex crispus
+Colchicum aut,Colchicum autumnale
+Zingiber off,Zingiber officinale
+Sanguinaria can,Sanguinaria canadensis
+Podophyllum pel,Podophyllum peltatum
+Chelidonium maj,Chelidonium majus
+Cimicifuga rac,Cimicifuga racemosa
