@@ -62,7 +62,8 @@ working with.
 > 21 MB file and a couple of other large files exceed GitHub's per-file upload limit
 > here, so they are shipped as parts: `extremities.json` + `extremities-2.json`, and
 > `jahr-materia-medica-1847.json` + `jahr-materia-medica-1847-2.json`. Concatenate
-> the parts, or download the complete library ZIP from **Releases**.)
+> the parts. The complete single-file JSON for every book ships in the source
+> library bundle.)
 
 ---
 
