@@ -223,15 +223,15 @@ footer{border-top:1px solid var(--border);padding:40px 0 54px;background:var(--b
 .notice{margin-top:18px;color:var(--muted2);font-size:12px;max-width:80ch}
 
 /* ---------- reveal animation ---------- */
-@media (prefers-reduced-motion: no-preference){
-  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
-  .reveal.in{opacity:1;transform:none}
-}
+.reveal{transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+html.js .reveal{opacity:0;transform:translateY(22px)}
+html.js .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   h1 .cursor{animation:none}
 }
 </style>
+<script>document.documentElement.className += ' js';</script>
 <style id="__overflow_fix__"> /* horizontal-overflow fixes */ .grid>*,.grid.g2>*{min-width:0} .steps>*{min-width:0} .tree{overflow-x:auto} .tablewrap{overflow-x:auto} .copyrow{flex-wrap:wrap} .copyrow input{flex:1 1 180px} </style>
 </head>
 <body>
@@ -695,19 +695,22 @@ console.log(mind.rubrics.length, <span class="s">"mind rubrics"</span>);</code><
     });
   });
 
-  // scroll reveal, respecting prefers-reduced-motion
+  // scroll reveal — hardened so content can never stay hidden
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var items = document.querySelectorAll('.reveal');
-  if(reduce || !('IntersectionObserver' in window)){
-    items.forEach(function(i){ i.classList.add('in'); });
-    return;
+  var reveals = [].slice.call(document.querySelectorAll('.reveal'));
+  function revealAll(){ reveals.forEach(function(el){ el.classList.add('in'); }); }
+  function revealInView(){ var vh=window.innerHeight||document.documentElement.clientHeight;
+    reveals.forEach(function(el){ var r=el.getBoundingClientRect(); if(r.top<vh+40&&r.bottom>-40) el.classList.add('in'); }); }
+  if(reduce || !('IntersectionObserver' in window)){ revealAll(); }
+  else{
+    var io = new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } }); },{threshold:0.08,rootMargin:'0px 0px -8% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+    setTimeout(revealInView,1000);
+    setTimeout(revealAll,4000);
+    window.addEventListener('scroll',revealInView,{passive:true});
+    window.addEventListener('resize',revealInView,{passive:true});
+    window.addEventListener('load',function(){ setTimeout(revealInView,200); });
   }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-  }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
-  items.forEach(function(i){ io.observe(i); });
 })();
 </script>
 </body>
