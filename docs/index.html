@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homoeopathic Materia Medica &amp; Repertory — JSON Dataset | Open-Domain Homoeopathy API</title>
+<meta name="description" content="13 open-domain homoeopathic Materia Medica and Repertory classics (1840–1906) compiled into clean, app-ready JSON — ~108k rubrics, verbatim strings, CC0 1.0. Fetch over raw CDN, no build step.">
+<meta name="keywords" content="homoeopathy, materia medica, repertory, JSON dataset, Kent repertory, homeopathy API, CC0, open data, rubric, remedies, OCR, verbatim, omm-json-builder">
+<meta name="author" content="Dr Sohil Momin">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0d1117">
+<link rel="canonical" href="https://drsamonline.github.io/homoeopathic-materia-medica-repertory-json/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Homoeopathic Materia Medica &amp; Repertory — JSON">
+<meta property="og:title" content="Homoeopathic Materia Medica &amp; Repertory — JSON Dataset">
+<meta property="og:description" content="Open-domain classical homoeopathy, compiled into clean, app-ready JSON. ~108k rubrics across 13 books, verbatim and CC0 1.0.">
+<meta property="og:url" content="https://drsamonline.github.io/homoeopathic-materia-medica-repertory-json/">
+<meta property="og:image" content="https://socialify.git.ci/drsamonline/homoeopathic-materia-medica-repertory-json/image?name=1&amp;owner=1&amp;description=1&amp;language=1&amp;theme=Dark&amp;font=Inter">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Homoeopathic Materia Medica &amp; Repertory — JSON Dataset">
+<meta name="twitter:description" content="Open-domain classical homoeopathy, compiled into clean, app-ready JSON. ~108k rubrics across 13 books, verbatim and CC0 1.0.">
+<meta name="twitter:image" content="https://socialify.git.ci/drsamonline/homoeopathic-materia-medica-repertory-json/image?name=1&amp;owner=1&amp;description=1&amp;language=1&amp;theme=Dark&amp;font=Inter">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Homoeopathic Materia Medica & Repertory — JSON",
+  "description": "A curated collection of 13 public-domain homoeopathic Materia Medica and Repertory classics (1840–1906), extracted from scanned page images into structured, verbatim JSON with ~108,000 rubrics. Fields are self-describing via a top-level type of repertory or materia_medica.",
+  "url": "https://drsamonline.github.io/homoeopathic-materia-medica-repertory-json/",
+  "sameAs": "https://github.com/drsamonline/homoeopathic-materia-medica-repertory-json",
+  "identifier": "homoeopathic-materia-medica-repertory-json",
+  "keywords": ["homoeopathy","materia medica","repertory","homeopathy","rubrics","remedies","open data","JSON","OCR","CC0"],
+  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "isAccessibleForFree": true,
+  "creator": {
+    "@type": "Person",
+    "name": "Dr Sohil Momin",
+    "url": "https://github.com/drsamonline"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Dr Sohil Momin"
+  },
+  "inLanguage": "en",
+  "version": "1.0",
+  "dateModified": "2026-10-15",
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://raw.githubusercontent.com/drsamonline/homoeopathic-materia-medica-repertory-json/main/repertory/kent-1897/index.json"
+    }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --bg:#0d1117; --bg2:#010409; --panel:#161b22; --panel2:#0f141b;
+  --border:#21262d; --border2:#30363d;
+  --fg:#e6edf3; --muted:#8b949e; --muted2:#6e7681;
+  --key:#79c0ff; --str:#7ee787; --num:#ffa657; --kw:#ff7b72; --punct:#8b949e;
+  --accent:#58a6ff; --accent2:#1f6feb;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  --maxw:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--fg);
+  font-family:var(--mono);font-size:15px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(1200px 600px at 50% -200px,rgba(88,166,255,.10),transparent 70%);
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.mono{font-family:var(--mono)}
+h1,h2,h3{line-height:1.25;letter-spacing:-.01em}
+section{padding:72px 0;border-top:1px solid var(--border)}
+.sec-tag{color:var(--num);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px}
+h2{font-size:clamp(22px,3vw,30px);margin:0 0 8px}
+.lead{color:var(--muted);max-width:72ch;margin:0 0 34px}
+code,pre{font-family:var(--mono)}
+
+/* ---------- nav ---------- */
+header.nav{
+  position:sticky;top:0;z-index:50;background:rgba(13,17,23,.82);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--border);
+}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:9px;font-weight:600;color:var(--fg);font-size:14px}
+.brand svg{width:20px;height:20px;color:var(--key);flex:none}
+.nav-links{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto;font-size:13px}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--fg);text-decoration:none}
+@media(max-width:640px){.nav-links{display:none}}
+
+/* ---------- hero ---------- */
+.hero{padding:66px 0 60px;border-top:none}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);background:var(--panel);
+  color:var(--muted);font-size:12px;padding:5px 12px;border-radius:999px;margin-bottom:22px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--str);box-shadow:0 0 8px var(--str)}
+h1{font-size:clamp(28px,5.2vw,50px);margin:0 0 18px;font-weight:700}
+h1 .cursor{display:inline-block;width:.55ch;background:var(--key);animation:blink 1.1s steps(1) infinite;margin-left:3px;color:transparent}
+@keyframes blink{50%{opacity:0}}
+.hero p.pitch{color:var(--muted);font-size:16.5px;max-width:64ch;margin:0 0 12px}
+.hero .sub{color:var(--muted2);font-size:13.5px;margin:0 0 26px}
+.hero .sub b{color:var(--str);font-weight:600}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 26px}
+.btn{display:inline-flex;align-items:center;gap:9px;border-radius:8px;padding:11px 18px;font-size:13.5px;font-weight:600;
+  border:1px solid var(--border2);background:var(--panel);color:var(--fg);transition:transform .12s ease,border-color .12s ease}
+.btn:hover{text-decoration:none;transform:translateY(-1px);border-color:var(--accent)}
+.btn.primary{background:var(--accent2);border-color:var(--accent2);color:#fff}
+.btn.primary:hover{background:#2a7aec}
+.btn svg{width:16px;height:16px}
+
+/* ---------- badges ---------- */
+.badges{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-top:6px}
+.badges img{height:20px;display:block}
+.cbadge{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;letter-spacing:.03em;
+  padding:4px 11px;border-radius:6px;border:1px solid var(--border2);background:var(--panel2);color:var(--muted)}
+.cbadge .k{color:var(--muted2);font-weight:500}
+.cbadge .v{color:var(--fg)}
+.cbadge b{color:var(--str)}
+.cbadge.blue b{color:var(--key)}
+.cbadge.amber b{color:var(--num)}
+.cbadge.violet b{color:#d2a8ff}
+
+/* ---------- grids & cards ---------- */
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:900px){.g3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.g3,.g2{grid-template-columns:1fr}}
+.card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--border);
+  border-radius:12px;padding:20px}
+.card h3{margin:0 0 8px;font-size:15px;display:flex;align-items:center;gap:9px}
+.card h3 svg{width:18px;height:18px;color:var(--key);flex:none}
+.card p{margin:0;color:var(--muted);font-size:13.5px}
+.card .tag{margin-top:12px;font-size:11px;color:var(--num)}
+
+/* ---------- code / json ---------- */
+.codeblock{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.codehead{display:flex;align-items:center;gap:9px;padding:9px 14px;border-bottom:1px solid var(--border);background:var(--panel2)}
+.codehead .fname{font-size:12.5px;color:var(--muted)}
+.codehead .lang{margin-left:auto;font-size:11px;color:var(--muted2);border:1px solid var(--border2);border-radius:5px;padding:1px 7px}
+.dots{display:flex;gap:6px}
+.dots i{width:11px;height:11px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:#ff5f57}.dots i:nth-child(2){background:#febc2e}.dots i:nth-child(3){background:#28c840}
+pre{margin:0;padding:16px;overflow:auto;font-size:13px;line-height:1.6;tab-size:2}
+pre.small{font-size:12.3px}
+.k{color:var(--key)}.s{color:var(--str)}.n{color:var(--num)}.kw{color:var(--kw)}.p{color:var(--punct)}.b{color:#d2a8ff}.c{color:var(--muted2);font-style:italic}
+
+/* ---------- json tree mock ---------- */
+.tree{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;font-size:13px;overflow:auto}
+.tree details{margin:0}
+.tree summary{cursor:pointer;list-style:none;padding:2px 0;white-space:nowrap}
+.tree summary::-webkit-details-marker{display:none}
+.tree summary .tw{display:inline-block;width:14px;color:var(--muted);transition:transform .15s ease}
+.tree details[open]>summary .tw{transform:rotate(90deg)}
+.tree .children{margin-left:20px;border-left:1px dashed var(--border2);padding-left:12px}
+.tree .row{padding:1.5px 0;white-space:nowrap}
+.tree .ckey{color:var(--key)}
+.tree .badge-t{color:var(--muted2);font-size:11.5px;margin-left:6px}
+.tree .ellip{color:var(--muted2)}
+
+/* ---------- tables ---------- */
+.tablewrap{overflow:auto;border:1px solid var(--border);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:12.8px;min-width:520px}
+th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:var(--panel2);color:var(--muted);font-weight:600;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;position:sticky;top:0}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(88,166,255,.05)}
+td .ftype{color:var(--num)}
+td .fname{color:var(--key)}
+td .fnull{color:var(--muted2)}
+.pill{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:999px;border:1px solid var(--border2);color:var(--muted)}
+.pill.rep{color:var(--key);border-color:#1f6feb55}
+.pill.mm{color:var(--str);border-color:#7ee78755}
+
+/* ---------- steps ---------- */
+.steps{counter-reset:s;display:grid;gap:14px}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step .num{counter-increment:s;flex:none;width:28px;height:28px;border-radius:7px;background:var(--panel2);
+  border:1px solid var(--border2);color:var(--key);display:grid;place-items:center;font-size:12.5px;font-weight:700}
+.step .num::before{content:counter(s)}
+.step .body{flex:1;min-width:0}
+.step .body h3{margin:2px 0 6px;font-size:14.5px}
+.copyrow{display:flex;gap:8px;align-items:stretch}
+.copyrow input{flex:1;min-width:0;background:var(--bg2);border:1px solid var(--border);border-radius:8px;
+  color:var(--fg);font-family:var(--mono);font-size:12.3px;padding:10px 12px}
+.copybtn{flex:none;border:1px solid var(--border2);background:var(--panel);color:var(--muted);border-radius:8px;
+  padding:0 14px;cursor:pointer;font-family:var(--mono);font-size:12px}
+.copybtn:hover{color:var(--fg);border-color:var(--accent)}
+.copybtn.ok{color:var(--str);border-color:var(--str)}
+
+/* ---------- faq ---------- */
+.faq details{border:1px solid var(--border);border-radius:10px;background:var(--panel2);margin-bottom:10px}
+.faq summary{cursor:pointer;padding:14px 16px;font-size:14px;font-weight:600;list-style:none;display:flex;gap:10px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .q{color:var(--num)}
+.faq summary .chev{margin-left:auto;transition:transform .18s ease;color:var(--muted)}
+.faq details[open] summary .chev{transform:rotate(90deg)}
+.faq .a{padding:0 16px 15px 40px;color:var(--muted);font-size:13.5px}
+.faq .a code{color:var(--key)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--border);padding:40px 0 54px;background:var(--bg2)}
+.foot{display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;align-items:center}
+.foot .who{color:var(--muted);font-size:13px}
+.foot .who b{color:var(--fg)}
+.foot a{font-size:13px}
+.notice{margin-top:18px;color:var(--muted2);font-size:12px;max-width:80ch}
+
+/* ---------- reveal animation ---------- */
+@media (prefers-reduced-motion: no-preference){
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  h1 .cursor{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <nav class="nav-in">
+    <a class="brand" href="#top" aria-label="Home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h9l7 7-9 9-7-7z"/><path d="M9 9h4"/><path d="M8 12h6"/></svg>
+      <span>materia-medica-repertory<span style="color:var(--muted2)">.json</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">features</a>
+      <a href="#schema">schema</a>
+      <a href="#sample">sample</a>
+      <a href="#get-started">download</a>
+      <a href="#faq">faq</a>
+      <a href="https://github.com/drsamonline/homoeopathic-materia-medica-repertory-json">repo&nbsp;&#8599;</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span> dataset &middot; schema v1.0 &middot; public domain</span>
+    <h1>homoeopathic materia medica &amp; repertory,<br>as clean JSON<span class="cursor">_</span></h1>
+    <p class="pitch">Open-domain classical homoeopathy, compiled into clean, app-ready JSON. <b>13</b> public-domain Materia Medica and Repertory classics (1840&ndash;1906), extracted from their scanned page images into structured, self-describing JSON.</p>
+    <p class="sub">Every remedy and rubric string is kept <b>verbatim</b> from the source &mdash; nothing invented, paraphrased or filled in. Unknown fields are <b>null</b>, never a guess.</p>
+    <div class="cta">
+      <a class="btn primary" href="#get-started">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        Get the data
+      </a>
+      <a class="btn" href="https://github.com/drsamonline/homoeopathic-materia-medica-repertory-json">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.03a9.6 9.6 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+    <div class="badges">
+      <img src="https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg" alt="License CC0 1.0" onerror="this.style.display='none'">
+      <img src="https://img.shields.io/badge/books-13-blue.svg" alt="13 books" onerror="this.style.display='none'">
+      <img src="https://img.shields.io/badge/rubrics-~108k-green.svg" alt="~108k rubrics" onerror="this.style.display='none'">
+      <img src="https://img.shields.io/badge/format-JSON-orange.svg" alt="JSON format" onerror="this.style.display='none'">
+      <span class="cbadge blue"><span class="k">books</span><b>13</b></span>
+      <span class="cbadge"><span class="k">rubrics</span><b>~108k</b></span>
+      <span class="cbadge amber"><span class="k">schema</span><b>1.0</b></span>
+      <span class="cbadge violet"><span class="k">licence</span><b>CC0-1.0</b></span>
+      <span class="cbadge"><span class="k">format</span><b>JSON</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section id="features">
+  <div class="wrap">
+    <p class="sec-tag">// what you get</p>
+    <h2>Structured, self-describing data</h2>
+    <p class="lead">Two shapes, both self-describing via a top-level <span class="s">&quot;type&quot;</span> field &mdash; one for repertories (rubric &rarr; remedies) and one for materia medica (remedy &rarr; symptoms).</p>
+    <div class="grid g3">
+      <article class="card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>13 classics, one schema</h3>
+        <p>Eleven repertories plus two materia medicas &mdash; Kent, Clarke, Hering, Bryant, Pulford and more &mdash; all normalised to the same field model.</p>
+        <div class="tag">1840&ndash;1906 &middot; public domain</div>
+      </article>
+      <article class="card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 12 2 2 4-4"/><path d="M12 2 4 6v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V6z"/></svg>Verbatim &amp; honest</h3>
+        <p>Every <span class="s">text</span> string is copied character-for-character from the source scan. Extraction quality is reported per book so you know exactly what you hold.</p>
+        <div class="tag">no invention &middot; null over guess</div>
+      </article>
+      <article class="card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/><path d="M9 9v11"/></svg>~108k rubrics</h3>
+        <p>Kent alone ships 59,114 rubrics across 34 chapters, with 353,000 remedy links &mdash; the whole library totals roughly 108,000 rubrics.</p>
+        <div class="tag">kent: 34 chapters + index.json</div>
+      </article>
+      <article class="card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>Fetch over a CDN</h3>
+        <p>No build step, no install. Pull any book straight from a raw or jsDelivr URL into a browser app, a Node script or a notebook.</p>
+        <div class="tag">raw.githubusercontent &middot; jsDelivr</div>
+      </article>
+      <article class="card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4"/><path d="m5 5 3 3"/><path d="M2 12h4"/><path d="M22 12h-4"/><circle cx="12" cy="13" r="4"/></svg>Reproducible pipeline</h3>
+        <p>The extraction is fully reproducible: <span class="s">pipeline/omm_pipeline.py</span> classifies a source text, applies the right grammar parser and reports a verbatim-fidelity rate.</p>
+        <div class="tag">omm-json-builder skill</div>
+      </article>
+      <article class="card reveal">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>Compact &amp; app-ready</h3>
+        <p>Files are compact JSON (no indentation) &mdash; roughly 40% smaller than pretty-printed, and they parse identically. Ideal for shipping inside an app.</p>
+        <div class="tag">~40% smaller</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCHEMA ============ -->
+<section id="schema">
+  <div class="wrap">
+    <p class="sec-tag">// structure</p>
+    <h2>Schema &amp; repository layout</h2>
+    <p class="lead">Every file is self-describing. <span class="s">&quot;type&quot;</span> is either <span class="s">&quot;repertory&quot;</span> or <span class="s">&quot;materia_medica&quot;</span>; <span class="s">schema_version</span> is <span class="s">&quot;1.0&quot;</span>.</p>
+
+    <div class="grid g2" style="margin-bottom:26px">
+      <div>
+        <div class="tree" aria-label="Repository structure">
+          <details open>
+            <summary><span class="tw">&#9656;</span><span class="ckey">homoeopathic-materia-medica-repertory-json</span><span class="badge-t">repository</span></summary>
+            <div class="children">
+              <div class="row"><span class="ckey">repertory/</span><span class="badge-t">rubric &#8594; remedies</span></div>
+              <details open>
+                <summary><span class="tw">&#9656;</span><span class="ckey">kent-1897/</span><span class="badge-t">34 chapters + index.json</span></summary>
+                <div class="children">
+                  <div class="row"><span class="s">&quot;mind.json&quot;</span> <span class="ellip">&middot; stomach.json &middot; head.json &hellip;</span></div>
+                  <div class="row"><span class="s">&quot;extremities.json&quot;</span> <span class="ellip">+ &quot;extremities-2.json&quot;</span></div>
+                  <div class="row"><span class="s">&quot;index.json&quot;</span> <span class="badge-t">type: repertory_index</span></div>
+                </div>
+              </details>
+              <div class="row"><span class="s">&quot;clarke-clinical-1900.json&quot;</span></div>
+              <div class="row"><span class="s">&quot;hering-repertory-1889.json&quot;</span></div>
+              <div class="row"><span class="ellip">&hellip; (9 more)</span></div>
+              <div class="row"><span class="ckey">materia_medica/</span><span class="badge-t">remedy &#8594; symptoms</span></div>
+              <div class="row"><span class="s">&quot;jahr-materia-medica-1847.json&quot;</span> <span class="ellip">(+ -2.json, part 2)</span></div>
+              <div class="row"><span class="s">&quot;bell-therapeutics-1906.json&quot;</span></div>
+              <div class="row"><span class="ckey">pipeline/</span><span class="badge-t">omm_pipeline.py + remedy lists</span></div>
+              <div class="row"><span class="ckey">skill/omm-json-builder/</span><span class="badge-t">extraction skill</span></div>
+              <div class="row"><span class="s">&quot;SCHEMA.md&quot;</span> <span class="s">&quot;CREDITS.md&quot;</span> <span class="s">&quot;CONTRIBUTING.md&quot;</span> <span class="s">&quot;LICENSE&quot;</span></div>
+            </div>
+          </details>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="height:100%">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/></svg>The <span class="s">book</span> object</h3>
+          <p style="margin-bottom:12px">Shared by both shapes.</p>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>field</th><th>type</th><th>notes</th></tr></thead>
+              <tbody>
+                <tr><td class="fname">id</td><td class="ftype">string</td><td>slug, e.g. <span class="s">kent-repertory-1897</span></td></tr>
+                <tr><td class="fname">title</td><td class="ftype">string</td><td>full title</td></tr>
+                <tr><td class="fname">author</td><td class="ftype">string</td><td>author(s)</td></tr>
+                <tr><td class="fname">year</td><td class="ftype">integer</td><td>year of the edition used</td></tr>
+                <tr><td class="fname">publisher</td><td class="ftype">string</td><td>where known, else <span class="fnull">&quot;&quot;</span></td></tr>
+                <tr><td class="fname">source_file</td><td class="ftype">string</td><td>the OCR text file it was built from</td></tr>
+                <tr><td class="fname">counts</td><td class="ftype">object</td><td><span class="s">{ sections, rubrics, remedy_links }</span> or <span class="s">{ remedies, symptoms }</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3><span class="pill rep">repertory</span> fields</h3>
+        <div class="tablewrap" style="margin-top:10px">
+          <table>
+            <thead><tr><th>field</th><th>type</th><th>rule</th></tr></thead>
+            <tbody>
+              <tr><td class="fname">sections[].title</td><td class="ftype">string</td><td>a chapter (e.g. <span class="s">Mind</span>, <span class="s">Stomach</span>), or <span class="s">General</span> when the source has no chapter structure</td></tr>
+              <tr><td class="fname">rubrics[].text</td><td class="ftype">string</td><td>the symptom string, verbatim from the source</td></tr>
+              <tr><td class="fname">rubrics[].parent</td><td class="ftype">string|null</td><td>for sub-rubrics, the heading this entry refines; <span class="fnull">null</span> for a top-level rubric</td></tr>
+              <tr><td class="fname">remedies[].abbrev</td><td class="ftype">string</td><td>the remedy exactly as printed</td></tr>
+              <tr><td class="fname">remedies[].grade</td><td class="ftype">integer|null</td><td>1&ndash;3 <b>only if the source prints a grade</b>, otherwise <span class="fnull">null</span> &mdash; never defaulted</td></tr>
+              <tr><td class="fname">remedies[].name</td><td class="ftype">string|null</td><td>canonical remedy name, resolved where possible, else <span class="fnull">null</span></td></tr>
+              <tr><td class="fname">remedies[].polarity</td><td class="ftype">string</td><td>printed polarity marker (e.g. <span class="s">+</span>)</td></tr>
+              <tr><td class="fname">rubrics[].note</td><td class="ftype">string|null</td><td>verbatim prose attached to a rubric (Jahr Part II), else <span class="fnull">null</span></td></tr>
+              <tr><td class="fname">remedy_index</td><td class="ftype">object</td><td>every printed remedy token &rarr; <span class="s">{ name, resolved }</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h3><span class="pill mm">materia_medica</span> fields</h3>
+        <div class="tablewrap" style="margin-top:10px">
+          <table>
+            <thead><tr><th>field</th><th>type</th><th>rule</th></tr></thead>
+            <tbody>
+              <tr><td class="fname">remedies[].name</td><td class="ftype">string</td><td>the remedy as printed (may be OCR-damaged in some books)</td></tr>
+              <tr><td class="fname">remedies[].abbrev</td><td class="ftype">string</td><td>printed abbreviation</td></tr>
+              <tr><td class="fname">remedies[].canonical_name</td><td class="ftype">string|null</td><td>best-effort resolved name, else <span class="fnull">null</span></td></tr>
+              <tr><td class="fname">symptoms[].chapter</td><td class="ftype">string</td><td>the labelled group the symptom belongs to (e.g. <span class="s">Stools</span>, <span class="s">Aggravation</span>), or <span class="s">General</span></td></tr>
+              <tr><td class="fname">symptoms[].text</td><td class="ftype">string</td><td>the symptom string, verbatim</td></tr>
+              <tr><td class="fname">symptoms[].grade</td><td class="ftype">integer|null</td><td>only if printed, else <span class="fnull">null</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;border-color:#1f6feb55">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V6z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>Three rules of the data</h3>
+      <p><b style="color:var(--str)">1. Verbatim</b> &mdash; every <span class="s">text</span> is copied from the source, not rewritten. &nbsp;<b style="color:var(--str)">2. No invention</b> &mdash; unknown values are <span class="s">null</span>; grades are never assumed. &nbsp;<b style="color:var(--str)">3. Validation</b> &mdash; each file passes schema validation with zero errors and reports a verbatim-fidelity rate in its QC report.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAMPLE ============ -->
+<section id="sample">
+  <div class="wrap">
+    <p class="sec-tag">// sample</p>
+    <h2>What a file looks like</h2>
+    <p class="lead">A trimmed extract from a repertory file &mdash; the top-level <span class="s">type</span>, the <span class="s">book</span> metadata, and a rubric with its graded remedies.</p>
+
+    <div class="codeblock reveal">
+      <div class="codehead">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="fname">repertory/kent-1897/index.json</span>
+        <span class="lang">json</span>
+      </div>
+<pre><code>{
+  <span class="k">"schema_version"</span>: <span class="s">"1.0"</span>,
+  <span class="k">"type"</span>: <span class="s">"repertory"</span>,
+  <span class="k">"book"</span>: {
+    <span class="k">"id"</span>: <span class="s">"kent-repertory-1897"</span>,
+    <span class="k">"title"</span>: <span class="s">"Repertory of the Homoeopathic Materia Medica"</span>,
+    <span class="k">"author"</span>: <span class="s">"James Tyler Kent"</span>,
+    <span class="k">"year"</span>: <span class="n">1897</span>,
+    <span class="k">"publisher"</span>: <span class="s">"Philadelphia: Examiner Printing House"</span>,
+    <span class="k">"language"</span>: <span class="s">"en"</span>,
+    <span class="k">"public_domain"</span>: <span class="kw">true</span>,
+    <span class="k">"source_file"</span>: <span class="s">"data/source_txt/kent-diff.txt"</span>,
+    <span class="k">"pipeline_version"</span>: <span class="s">"omm_pipeline 1.0"</span>,
+    <span class="k">"counts"</span>: { <span class="k">"sections"</span>: <span class="n">34</span>, <span class="k">"rubrics"</span>: <span class="n">59114</span>, <span class="k">"remedy_links"</span>: <span class="n">353000</span> }
+  },
+  <span class="k">"sections"</span>: [
+    {
+      <span class="k">"id"</span>: <span class="s">"kent-repertory-1897-s1"</span>,
+      <span class="k">"title"</span>: <span class="s">"Mind"</span>,
+      <span class="k">"rubrics"</span>: [
+        {
+          <span class="k">"id"</span>: <span class="s">"kent-repertory-1897-r00001"</span>,
+          <span class="k">"text"</span>: <span class="s">"Anger (Irascibility) &hellip;"</span>,
+          <span class="k">"parent"</span>: <span class="kw">null</span>,
+          <span class="k">"remedies"</span>: [
+            { <span class="k">"abbrev"</span>: <span class="s">"Acon"</span>, <span class="k">"grade"</span>: <span class="kw">null</span>, <span class="k">"polarity"</span>: <span class="s">"+"</span>, <span class="k">"name"</span>: <span class="s">"Aconitum napellus"</span> }
+          ]
+        }
+      ]
+    }
+  ],
+  <span class="k">"remedy_index"</span>: {
+    <span class="k">"Acon"</span>: { <span class="k">"name"</span>: <span class="s">"Aconitum napellus"</span>, <span class="k">"resolved"</span>: <span class="kw">true</span> }
+  }
+}</code></pre>
+    </div>
+
+    <div class="codeblock reveal" style="margin-top:16px">
+      <div class="codehead">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="fname">materia_medica/bell-therapeutics-1906.json</span>
+        <span class="lang">json</span>
+      </div>
+<pre><code>{
+  <span class="k">"schema_version"</span>: <span class="s">"1.0"</span>,
+  <span class="k">"type"</span>: <span class="s">"materia_medica"</span>,
+  <span class="k">"book"</span>: {
+    <span class="k">"id"</span>: <span class="s">"bell-therapeutics-1906"</span>,
+    <span class="k">"title"</span>: <span class="s">"Homoeopathic Therapeutics"</span>,
+    <span class="k">"author"</span>: <span class="s">"James B. Bell"</span>,
+    <span class="k">"year"</span>: <span class="n">1906</span>,
+    <span class="k">"counts"</span>: { <span class="k">"remedies"</span>: <span class="n">103</span>, <span class="k">"symptoms"</span>: <span class="n">5547</span> }
+  },
+  <span class="k">"remedies"</span>: [
+    {
+      <span class="k">"name"</span>: <span class="s">"Aconitum Napellus"</span>,
+      <span class="k">"abbrev"</span>: <span class="s">"Acon"</span>,
+      <span class="k">"canonical_name"</span>: <span class="s">"Aconitum napellus"</span>,
+      <span class="k">"symptoms"</span>: [
+        { <span class="k">"chapter"</span>: <span class="s">"Mind"</span>, <span class="k">"text"</span>: <span class="s">"Anxiety, with fear of death"</span>, <span class="k">"grade"</span>: <span class="kw">null</span> }
+      ]
+    }
+  ]
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GET STARTED ============ -->
+<section id="get-started">
+  <div class="wrap">
+    <p class="sec-tag">// get started</p>
+    <h2>Download &amp; fetch</h2>
+    <p class="lead">No build step and no install. Read any book straight from a raw URL or a jsDelivr CDN URL. Files are compact JSON and parse identically to pretty-printed.</p>
+
+    <div class="steps">
+      <div class="step">
+        <span class="num"></span>
+        <div class="body">
+          <h3>Fetch a whole repertory (Python)</h3>
+          <div class="codeblock">
+            <div class="codehead"><span class="dots"><i></i><i></i><i></i></span><span class="fname">fetch.py</span><span class="lang">python</span></div>
+<pre class="small"><code><span class="kw">import</span> json, urllib.request
+
+URL = <span class="s">"https://raw.githubusercontent.com/drsamonline/"</span> \
+      <span class="s">"homoeopathic-materia-medica-repertory-json/main/"</span> \
+      <span class="s">"repertory/kent-1897/index.json"</span>
+
+rep = json.load(urllib.request.urlopen(URL))
+<span class="kw">for</span> sec <span class="kw">in</span> rep[<span class="s">"sections"</span>]:
+    <span class="kw">for</span> r <span class="kw">in</span> sec[<span class="s">"rubrics"</span>]:
+        <span class="kw">if</span> any(x[<span class="s">"abbrev"</span>] == <span class="s">"Acon"</span> <span class="kw">for</span> x <span class="kw">in</span> r[<span class="s">"remedies"</span>]):
+            <span class="kw">print</span>(sec[<span class="s">"title"</span>], <span class="s">"&gt;"</span>, r[<span class="s">"text"</span>])</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="num"></span>
+        <div class="body">
+          <h3>Fetch in the browser / Node</h3>
+          <div class="codeblock">
+            <div class="codehead"><span class="dots"><i></i><i></i><i></i></span><span class="fname">app.js</span><span class="lang">javascript</span></div>
+<pre class="small"><code><span class="kw">const</span> base = <span class="s">"https://cdn.jsdelivr.net/gh/drsamonline/"</span> +
+             <span class="s">"homoeopathic-materia-medica-repertory-json@main/"</span>;
+
+<span class="kw">const</span> rep = <span class="kw">await</span> fetch(base + <span class="s">"repertory/kent-1897/mind.json"</span>)
+  .then(r =&gt; r.json());
+
+<span class="kw">const</span> mind = rep.section;
+console.log(mind.rubrics.length, <span class="s">"mind rubrics"</span>);</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="num"></span>
+        <div class="body">
+          <h3>Copy a raw URL</h3>
+          <p style="color:var(--muted);font-size:13px;margin:0 0 10px">The branch is <span class="s">main</span>. Swap the path for any book listed below.</p>
+          <div class="copyrow">
+            <input id="rawurl" readonly value="https://raw.githubusercontent.com/drsamonline/homoeopathic-materia-medica-repertory-json/main/repertory/kent-1897/index.json">
+            <button class="copybtn" data-copy="#rawurl" type="button">copy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <span class="num"></span>
+        <div class="body">
+          <h3>Or clone the repo</h3>
+          <div class="copyrow">
+            <input id="cloneurl" readonly value="git clone https://github.com/drsamonline/homoeopathic-materia-medica-repertory-json.git">
+            <button class="copybtn" data-copy="#cloneurl" type="button">copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin:34px 0 12px;font-size:16px">Every file, and where to find it</h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>book</th><th>author</th><th>year</th><th>size</th><th>verbatim</th><th>path</th></tr></thead>
+        <tbody>
+          <tr><td>Kent&rsquo;s Repertory</td><td>James Tyler Kent</td><td>1897</td><td>59,114 rubrics</td><td>94.1%</td><td><span class="s">repertory/kent-1897/index.json</span></td></tr>
+          <tr><td>Clarke&rsquo;s Clinical Repertory</td><td>John Henry Clarke</td><td>1900</td><td>12,537 rubrics</td><td>100%</td><td><span class="s">repertory/clarke-clinical-1900.json</span></td></tr>
+          <tr><td>Hering&rsquo;s Repertory</td><td>Hom. Med. Soc. of Pennsylvania</td><td>1889</td><td>11,156 rubrics</td><td>93.7%</td><td><span class="s">repertory/hering-repertory-1889.json</span></td></tr>
+          <tr><td>Bryant&rsquo;s Pocket Repertory</td><td>J. Bryant</td><td>1900</td><td>8,892 rubrics</td><td>90.2%</td><td><span class="s">repertory/bryant-pocket-1900.json</span></td></tr>
+          <tr><td>Pulford &mdash; Rheumatism &amp; Sciatica</td><td>Alfred Pulford</td><td>1898</td><td>7,518 rubrics</td><td>92.6%</td><td><span class="s">repertory/pulford-rheumatism-1898.json</span></td></tr>
+          <tr><td>Sensation-as-if</td><td>A. W. Holcomb</td><td>1890</td><td>2,721 rubrics</td><td>100%</td><td><span class="s">repertory/sensation-as-if-1890.json</span></td></tr>
+          <tr><td>Vilas &mdash; Eye &amp; Ear</td><td>O. H. Vilas</td><td>1890</td><td>2,465 rubrics</td><td>80.3%</td><td><span class="s">repertory/vilas-eye-ear-1890.json</span></td></tr>
+          <tr><td>Humphreys &mdash; Sexual System</td><td>F. Humphreys</td><td>1860</td><td>1,280 rubrics</td><td>100%</td><td><span class="s">repertory/humphreys-sexual-1860.json</span></td></tr>
+          <tr><td>Jahr &mdash; Symptomatology</td><td>G. H. G. Jahr</td><td>1847</td><td>587 rubrics</td><td>100%</td><td><span class="s">repertory/jahr-repertory-1847.json</span></td></tr>
+          <tr><td>Lippe&rsquo;s Repertory</td><td>Constantine Lippe</td><td>1879</td><td>452 rubrics</td><td>88.7%</td><td><span class="s">repertory/lippe-repertory-1879.json</span></td></tr>
+          <tr><td>Drake &mdash; Foot-sweat</td><td>Olin M. Drake</td><td>1894</td><td>84 rubrics</td><td>100%</td><td><span class="s">repertory/drake-foot-sweat-1894.json</span></td></tr>
+          <tr><td>Jahr&rsquo;s Manual, Part I</td><td>G. H. G. Jahr</td><td>1847</td><td>199 remedies / 26,734 symptoms</td><td>98.7%</td><td><span class="s">materia_medica/jahr-materia-medica-1847.json</span></td></tr>
+          <tr><td>Bell&rsquo;s Therapeutics</td><td>James B. Bell</td><td>1906</td><td>103 remedies / 5,547 symptoms</td><td>97.2%</td><td><span class="s">materia_medica/bell-therapeutics-1906.json</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:var(--muted2);font-size:12.5px;margin-top:12px">Kent ships split by chapter in <span class="s">repertory/kent-1897/</span> (34 chapter files + <span class="s">index.json</span>). A few large files exceed GitHub&rsquo;s per-file upload limit and ship as parts &mdash; <span class="s">extremities.json</span> + <span class="s">extremities-2.json</span>, and <span class="s">jahr-materia-medica-1847.json</span> + <span class="s">jahr-materia-medica-1847-2.json</span>. Concatenate the parts.</p>
+
+    <div class="card" style="margin-top:24px;border-color:#ffa65755">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M9 13v8l3-2 3 2v-8"/></svg>Licence &amp; credits</h3>
+      <p><b style="color:var(--num)">Data: CC0 1.0 Universal</b> &mdash; public domain dedication. Free to use, modify and redistribute, including commercially. Source texts were all published before 1929 and are in the public domain. Please credit the <b>authors of each book</b> and the <b>JSON compiler (Dr Sohil Momin)</b> wherever this data is used &mdash; see <a href="https://github.com/drsamonline/homoeopathic-materia-medica-repertory-json/blob/main/CREDITS.md">CREDITS.md</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <p class="sec-tag">// faq</p>
+    <h2>Questions</h2>
+    <div class="faq" style="margin-top:26px">
+      <details>
+        <summary><span class="q">Q.</span> What exactly is in this dataset? <span class="chev">&#9656;</span></summary>
+        <div class="a">A curated collection of 13 public-domain homoeopathic Materia Medica and Repertory classics (1840&ndash;1906), extracted from their scanned page images into structured JSON ready for apps, search tools, study aids and AI projects. Eleven are repertories (rubric &rarr; remedies) and two are materia medicas (remedy &rarr; symptoms).</div>
+      </details>
+      <details>
+        <summary><span class="q">Q.</span> Is the text verified? <span class="chev">&#9656;</span></summary>
+        <div class="a">This is honest, verbatim OCR data, not hand-verified text. Every rubric/symptom string is verbatim from the source scan, and each book reports a verbatim-fidelity rate. Some books carry OCR fragments and garbled remedy abbreviations (notably Vilas, Lippe, Clarke, Pulford, Bryant); Bell&rsquo;s remedy names are OCR-mangled (partly auto-resolved). <b>Verify against the original text before clinical use.</b></div>
+      </details>
+      <details>
+        <summary><span class="q">Q.</span> What does <code>"grade": null</code> mean? <span class="chev">&#9656;</span></summary>
+        <div class="a">A grade is an integer 1&ndash;3 <b>only if the source prints a grade</b>, otherwise it is <code>null</code>. Grades are never defaulted or assumed. The same no-invention rule applies to every unknown value &mdash; it is <code>null</code>, never a guess.</div>
+      </details>
+      <details>
+        <summary><span class="q">Q.</span> Why is Kent split into chapters? <span class="chev">&#9656;</span></summary>
+        <div class="a">Kent is provided split by chapter in <code>repertory/kent-1897/</code> &mdash; 34 chapter files plus <code>index.json</code> &mdash; so an app can load one chapter at a time. Its single 21&nbsp;MB file exceeds GitHub&rsquo;s per-file upload limit, so it ships as parts (e.g. <code>extremities.json</code> + <code>extremities-2.json</code>). Concatenate the parts to rebuild the full file.</div>
+      </details>
+      <details>
+        <summary><span class="q">Q.</span> Can I use this commercially? <span class="chev">&#9656;</span></summary>
+        <div class="a">Yes. The data is released under <b>CC0 1.0 Universal</b> &mdash; a public domain dedication &mdash; free to use, modify and redistribute, including commercially. Please still credit the book authors and the JSON compiler (Dr Sohil Momin) wherever the data is used.</div>
+      </details>
+      <details>
+        <summary><span class="q">Q.</span> How was the data produced? <span class="chev">&#9656;</span></summary>
+        <div class="a">The extraction is fully reproducible. <code>pipeline/omm_pipeline.py</code> classifies a source text, applies the right grammar parser, validates the output and reports a verbatim-fidelity rate. <code>skill/omm-json-builder/</code> packages the same pipeline as an agent skill.</div>
+      </details>
+      <details>
+        <summary><span class="q">Q.</span> I found a bad OCR token &mdash; can I fix it? <span class="chev">&#9656;</span></summary>
+        <div class="a">Please do. Open an issue describing the book, the rubric and the correct reading, or open a pull request with the correction. See <a href="https://github.com/drsamonline/homoeopathic-materia-medica-repertory-json/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for the rules of the data (verbatim, no invention).</div>
+      </details>
+      <details>
+        <summary><span class="q">Q.</span> Is this medical advice? <span class="chev">&#9656;</span></summary>
+        <div class="a">No. These are historical texts for study and software. They are not medical advice &mdash; always consult a qualified practitioner.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="who">
+        <b>Homoeopathic Materia Medica &amp; Repertory &mdash; JSON</b><br>
+        Built by <b>Dr. Sohil Momin</b> &middot; CC0 1.0 &middot; built with the <b>omm-json-builder</b> pipeline.
+      </div>
+      <div>
+        <a href="https://github.com/drsamonline/homoeopathic-materia-medica-repertory-json">github.com/drsamonline/homoeopathic-materia-medica-repertory-json &#8599;</a>
+      </div>
+    </div>
+    <p class="notice">Data: CC0 1.0 Universal. Source texts published before 1929, in the public domain. Please credit the authors of each book and the JSON compiler wherever this data is used. Not medical advice.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // copy buttons
+  document.querySelectorAll('.copybtn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.querySelector(btn.getAttribute('data-copy'));
+      if(!el) return;
+      var text = el.value;
+      function done(){
+        var old = btn.textContent;
+        btn.textContent = 'copied';
+        btn.classList.add('ok');
+        setTimeout(function(){ btn.textContent = old; btn.classList.remove('ok'); }, 1400);
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done, function(){ el.select(); document.execCommand('copy'); done(); });
+      } else {
+        el.select(); document.execCommand('copy'); done();
+      }
+    });
+  });
+
+  // scroll reveal, respecting prefers-reduced-motion
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items = document.querySelectorAll('.reveal');
+  if(reduce || !('IntersectionObserver' in window)){
+    items.forEach(function(i){ i.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+  items.forEach(function(i){ io.observe(i); });
+})();
+</script>
+</body>
+</html>

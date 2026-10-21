@@ -4,6 +4,26 @@
 
 **Open-domain classical homoeopathy, compiled into clean, app-ready JSON.**
 
+13 public-domain Materia Medica &amp; Repertory classics (1840–1906) · ~108k rubrics · verbatim · CC0 1.0
+
+[![Landing page](https://img.shields.io/badge/landing%20page-live-58a6ff?style=flat-square)](https://drsamonline.github.io/homoeopathic-materia-medica-repertory-json/)
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](LICENSE)
+[![Books](https://img.shields.io/badge/books-13-blue.svg)](#-the-library)
+[![Rubrics](https://img.shields.io/badge/rubrics-~108k-green.svg)](#-the-library)
+[![Format](https://img.shields.io/badge/format-JSON-orange.svg)](#-schema)
+
+**➜ [Browse the dataset landing page](https://drsamonline.github.io/homoeopathic-materia-medica-repertory-json/)**
+
+</div>
+
+---
+
+<div align="center">
+
+# 🏛️ Homoeopathic Materia Medica & Repertory — JSON
+
+**Open-domain classical homoeopathy, compiled into clean, app-ready JSON.**
+
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](LICENSE)
 [![Books](https://img.shields.io/badge/books-13-blue.svg)](#-the-library)
 [![Rubrics](https://img.shields.io/badge/rubrics-~108k-green.svg)](#-the-library)
