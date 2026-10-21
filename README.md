@@ -57,7 +57,7 @@ working with.
 
 | Book | Author | Year | Rubrics | Verbatim |
 |---|---|---:|---:|---:|
-| [Kent's Repertory](repertory/kent-repertory-1897.json) | James Tyler Kent | 1897 | 59,114 | 94.1% |
+| [Kent's Repertory](repertory/kent-1897/) | James Tyler Kent | 1897 | 59,114 | 94.1% |
 | [Clarke's Clinical Repertory](repertory/clarke-clinical-1900.json) | John Henry Clarke | 1900 | 12,537 | 100% |
 | [Hering's Repertory](repertory/hering-repertory-1889.json) | Hom. Med. Soc. of Pennsylvania | 1889 | 11,156 | 93.7% |
 | [Bryant's Pocket Repertory](repertory/bryant-pocket-1900.json) | J. Bryant | 1900 | 8,892 | 90.2% |
