@@ -20,7 +20,6 @@
 
 <div align="center">
 
-# 🏛️ Homoeopathic Materia Medica & Repertory — JSON
 
 **Open-domain classical homoeopathy, compiled into clean, app-ready JSON.**
 
