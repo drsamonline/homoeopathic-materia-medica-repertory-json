@@ -7,6 +7,7 @@
 13 public-domain Materia Medica &amp; Repertory classics (1840–1906) · ~108k rubrics · verbatim · CC0 1.0
 
 [![Landing page](https://img.shields.io/badge/landing%20page-live-58a6ff?style=flat-square)](https://drsamonline.github.io/homoeopathic-materia-medica-repertory-json/)
+[![All projects](https://img.shields.io/badge/All%20projects-drsamonline.github.io-58a6ff?style=flat-square)](https://drsamonline.github.io/)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](LICENSE)
 [![Books](https://img.shields.io/badge/books-13-blue.svg)](#-the-library)
 [![Rubrics](https://img.shields.io/badge/rubrics-~108k-green.svg)](#-the-library)
