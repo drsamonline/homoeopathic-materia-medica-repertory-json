@@ -233,6 +233,14 @@ html.js .reveal.in{opacity:1;transform:none}
 </style>
 <script>document.documentElement.className += ' js';</script>
 <style id="__overflow_fix__"> /* horizontal-overflow fixes */ .grid>*,.grid.g2>*{min-width:0} .steps>*{min-width:0} .tree{overflow-x:auto} .tablewrap{overflow-x:auto} .copyrow{flex-wrap:wrap} .copyrow input{flex:1 1 180px} </style>
+<style id="__preview_style__">
+  /* ---- data preview section (additive) ---- */
+  .pv-num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+  #preview .tablewrap table{table-layout:fixed;width:100%;min-width:0}
+  #preview .tablewrap th,#preview .tablewrap td{padding:8px 9px;overflow-wrap:anywhere}
+  .pv-note{margin-top:12px;font-size:12.5px;color:var(--muted)}
+  .pv-cap{margin-top:18px;font-size:.85rem;color:var(--muted);font-family:var(--mono)}
+</style>
 </head>
 <body>
 
@@ -509,6 +517,81 @@ html.js .reveal.in{opacity:1;transform:none}
   ]
 }</code></pre>
     </div>
+  </div>
+</section>
+
+<!-- ============ PREVIEW ============ -->
+<section id="preview">
+  <div class="wrap">
+    <p class="sec-tag">// preview</p>
+    <h2>The data, and the books it comes from</h2>
+    <p class="lead">A trimmed file in the project's own schema, beside the repertory set and its rubric counts. Every <span class="s">text</span> string is verbatim from the source scan; unknown values are <span class="s">null</span>, never a guess.</p>
+
+    <div class="grid g2" style="align-items:start;margin-top:26px">
+      <div class="codeblock reveal">
+        <div class="codehead">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="fname">repertory/kent-1897/mind.json</span>
+          <span class="lang">json</span>
+        </div>
+<pre><code>{
+  <span class="k">"schema_version"</span>: <span class="s">"1.0"</span>,
+  <span class="k">"type"</span>: <span class="s">"repertory"</span>,
+  <span class="k">"book"</span>: {
+    <span class="k">"id"</span>: <span class="s">"kent-repertory-1897"</span>,
+    <span class="k">"title"</span>: <span class="s">"Repertory of the Homoeopathic Materia Medica"</span>,
+    <span class="k">"author"</span>: <span class="s">"James Tyler Kent"</span>,
+    <span class="k">"year"</span>: <span class="n">1897</span>,
+    <span class="k">"counts"</span>: { <span class="k">"sections"</span>: <span class="n">34</span>, <span class="k">"rubrics"</span>: <span class="n">59114</span> }
+  },
+  <span class="k">"sections"</span>: [
+    {
+      <span class="k">"title"</span>: <span class="s">"Mind"</span>,
+      <span class="k">"rubrics"</span>: [
+        {
+          <span class="k">"text"</span>: <span class="s">"Fear of death"</span>,
+          <span class="k">"parent"</span>: <span class="kw">null</span>,
+          <span class="k">"remedies"</span>: [
+            { <span class="k">"abbrev"</span>: <span class="s">"Acon"</span>, <span class="k">"grade"</span>: <span class="kw">null</span>,
+              <span class="k">"polarity"</span>: <span class="s">"+"</span>, <span class="k">"name"</span>: <span class="s">"Aconitum napellus"</span> }
+          ]
+        }
+      ]
+    }
+  ],
+  <span class="k">"remedy_index"</span>: {
+    <span class="k">"Acon"</span>: { <span class="k">"name"</span>: <span class="s">"Aconitum napellus"</span>, <span class="k">"resolved"</span>: <span class="kw">true</span> }
+  }
+}</code></pre>
+      </div>
+
+      <div class="card">
+        <h3><span class="pill rep">repertory</span> books &amp; rubric counts</h3>
+        <div class="tablewrap" style="margin-top:12px">
+          <table>
+            <colgroup><col style="width:56%"><col style="width:16%"><col style="width:28%"></colgroup>
+            <thead><tr><th>Book</th><th>Year</th><th class="pv-num">Rubrics</th></tr></thead>
+            <tbody>
+              <tr><td>Kent's Repertory</td><td>1897</td><td class="pv-num">59,114</td></tr>
+              <tr><td>Clarke's Clinical Repertory</td><td>1900</td><td class="pv-num">12,537</td></tr>
+              <tr><td>Hering's Repertory</td><td>1889</td><td class="pv-num">11,156</td></tr>
+              <tr><td>Bryant's Pocket Repertory</td><td>1900</td><td class="pv-num">8,892</td></tr>
+              <tr><td>Pulford &mdash; Rheumatism &amp; Sciatica</td><td>1898</td><td class="pv-num">7,518</td></tr>
+              <tr><td>Sensation-as-if</td><td>1890</td><td class="pv-num">2,721</td></tr>
+              <tr><td>Vilas &mdash; Eye &amp; Ear</td><td>1890</td><td class="pv-num">2,465</td></tr>
+              <tr><td>Humphreys &mdash; Sexual System</td><td>1860</td><td class="pv-num">1,280</td></tr>
+              <tr><td>Jahr &mdash; Symptomatology</td><td>1847</td><td class="pv-num">587</td></tr>
+              <tr><td>Lippe's Repertory</td><td>1879</td><td class="pv-num">452</td></tr>
+              <tr><td>Drake &mdash; Foot-sweat</td><td>1894</td><td class="pv-num">84</td></tr>
+              <tr><td><b>All repertories</b></td><td>11 books</td><td class="pv-num"><b>~108,000</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="pv-note">Plus two materia medica books, counted separately: <b>Jahr's Manual, Part I</b> (199 remedies / 26,734 symptoms) and <b>Bell's Therapeutics</b> (103 remedies / 5,547 symptoms). Authors are credited in CREDITS.md; Kent ships split by chapter &mdash; 34 chapter files + <span class="s">index.json</span>.</p>
+      </div>
+    </div>
+
+    <p class="pv-cap">Data only &mdash; this repository ships the JSON dataset and its extraction pipeline; there is no app or interface to preview.</p>
   </div>
 </section>
 
