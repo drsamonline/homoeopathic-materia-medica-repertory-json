@@ -27,6 +27,16 @@ this repo could not provide.
 (abbrev → canonical name). One file per chapter; `extremities` is split into parts
 because of size.
 
+## File layout and parents
+
+One file per chapter. Chapters too large for a single file are split —
+`extremities.json` / `-2` / `-3`, `head.json` / `-2`, `mind.json` / `-2` — and
+`index.json` lists every file.
+
+`rubrics[].parent` is the `id` of the parent rubric. Where a chapter is split, some
+parents live in an earlier part file (e.g. 183 rubrics in `mind-2.json` are parented
+into `mind.json`), so resolve parents across all parts of a chapter, not just one file.
+
 ## Licence
 
 **GPL v3**, as part of the OpenRep source code — *not* public domain. Reuse of this
