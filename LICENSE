@@ -1,33 +1,72 @@
-CC0 1.0 Universal (CC0 1.0)
-Public Domain Dedication
-=========================================================
+homoeopathic-materia-medica-repertory-json — Licensing
+======================================================
 
-The person who associated a work with this deed has dedicated the work to the
-public domain by waiving all of his or her rights to the work worldwide under
-copyright law, including all related and neighboring rights, to the extent
+This repository holds two kinds of material under two different licences.  They
+do not conflict: each folder is covered by exactly one of them, and the folder
+that is GPL v3 is listed explicitly below.
+
+--------------------------------------------------------------------
+1.  Compiled public-domain datasets  —  CC0 1.0 Universal
+--------------------------------------------------------------------
+The person who associated these works with this deed has dedicated them to the
+public domain by waiving all of their rights to the work worldwide under
+copyright law, including all related and neighbouring rights, to the extent
 allowed by law.
 
 You can copy, modify, distribute and perform the work, even for commercial
 purposes, all without asking permission.
 
-In no way are the patent or trademark rights of any person affected by CC0, nor
-are the rights that other persons may have in the work or in how the work is
-used, such as publicity or privacy rights.
+Covered here:
 
-Unless expressly stated otherwise, the person who associated a work with this
-deed makes no warranties about the work, and disclaims liability for all uses of
-the work, to the fullest extent permitted by applicable law.
+    repertory/bryant-pocket-1900.json
+    repertory/clarke-clinical-1900.json
+    repertory/drake-foot-sweat-1894.json
+    repertory/hering-repertory-1889.json
+    repertory/humphreys-sexual-1860.json
+    repertory/jahr-repertory-1847.json
+    repertory/kent-1897/
+    repertory/lippe-repertory-1879.json
+    repertory/pulford-rheumatism-1898.json
+    repertory/sensation-as-if-1890.json
+    repertory/vilas-eye-ear-1890.json
+    materia_medica/
 
-When using or citing the work, you should not imply endorsement by the author or
-the affirmer.
-
----------------------------------------------------------
-
-The JSON data set in this repository is a compilation of PUBLIC DOMAIN source
-texts (all published before 1929). It is released under CC0 1.0 — free to use,
-modify and redistribute, including commercially.
-
-Please credit the authors of the source texts and the compiler, Dr Sohil Momin,
-wherever this data is used. See CREDITS.md.
+These are compilations of source texts published before 1929 and therefore in
+the public domain.  Please credit the authors of the source texts and the
+compiler, Dr Sohil Momin.  See CREDITS.md.
 
 Full legal text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+--------------------------------------------------------------------
+2.  repertory/repertorium-publicum-2008/  —  GNU GPL v3   (NOT CC0)
+--------------------------------------------------------------------
+This folder is third-party material and is NOT covered by the CC0 dedication
+above:
+
+    Repertorium Publicum (2008), Vladimir Polony — an open, Kent-derived
+    repertory published as part of the OpenRep source code under the GNU
+    General Public License v3.
+
+It is not public domain, and it is not this compiler's work to relicense.  It
+remains under GPL v3.  Any use or redistribution of these files must comply with
+GPL v3, including its copyleft requirement that derivative works are licensed
+under GPL v3.
+
+    Full text: LICENSE-GPL-3.0.txt  (or https://www.gnu.org/licenses/gpl-3.0.txt)
+    Source   : https://github.com/nondeterministic/oorep
+
+--------------------------------------------------------------------
+Redistributing the whole repository
+--------------------------------------------------------------------
+If you redistribute the repository as a whole, both licences apply and GPL v3 is
+the stricter of the two: GPL v3 governs any use of
+repertory/repertorium-publicum-2008/, while everything else remains CC0.
+
+GPL v3 permits commercial use.  It requires that derivative works stay under
+GPL v3 and that the corresponding source is made available.
+
+--------------------------------------------------------------------
+Warranty
+--------------------------------------------------------------------
+Both licences disclaim warranties.  The data is provided "as is", and the
+accuracy of the underlying OCR and transcriptions is not guaranteed.

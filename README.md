@@ -21,3 +21,15 @@ by Vladimir Polony (2008), a Kent-derived repertory with its own chapter structu
 (separate *Clinical*, *Appetite*, *Blood* and *Heart & Circulation* chapters) and its
 own additions. It is licensed **GPL v3** as part of the OpenRep source code — not
 public domain. See the dataset README for details.
+
+## Licensing — two licences, one per folder
+
+- **Compiled public-domain datasets** (everything except the folder below) — **CC0 1.0**.
+  Compilations of source texts published before 1929.
+- **`repertory/repertorium-publicum-2008/`** — **GNU GPL v3**, *not* CC0. It is
+  third-party material (Repertorium Publicum, 2008, Vladimir Polony; part of the
+  OpenRep source code) and cannot be relicensed here. Use of those files must comply
+  with GPL v3, including its copyleft terms.
+
+The CC0 dedication in `LICENSE` does not apply to that folder. See `LICENSE` and
+`LICENSE-GPL-3.0.txt`.
