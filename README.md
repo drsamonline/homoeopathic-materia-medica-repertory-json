@@ -1,5 +1,7 @@
 # homoeopathic-materia-medica-repertory-json
 
+[![License: Free to use, attribution required](https://img.shields.io/badge/license-Free%20to%20use,%20attribution%20required-yellowgreen)](LICENSE)
+
 ## Repertorium Publicum (2008) — complete, graded
 
 `repertory/repertorium-publicum-2008/` holds a **complete, fully graded** open
