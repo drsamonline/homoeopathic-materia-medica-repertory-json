@@ -356,7 +356,7 @@ def tail_remedies(text, vocab):
     keep = []
     cut = len(body)
     for pos, tok in reversed(toks):
-        if tok_key(tok) in vocab:
+        if vocab_has(vocab, tok):
             keep.append(tok)
             cut = pos
         else:
@@ -1011,32 +1011,6 @@ def finish(a, sections, raw, notes=None):
     print("\n".join(qc))
 
 
-def main():
-    ap = argparse.ArgumentParser(description="book-specific repertory grammars")
-    sub = ap.add_subparsers(dest="book", required=True)
-    for name in ("fever", "bryant", "gentry", "knerr"):
-        p = sub.add_parser(name)
-        p.add_argument("--src", required=True)
-        p.add_argument("--slug", required=True)
-        p.add_argument("--title", default="")
-        p.add_argument("--author", default="")
-        p.add_argument("--year", type=int, default=None)
-        p.add_argument("--publisher", default="")
-        p.add_argument("--out", required=True)
-        p.add_argument("--qc", required=True)
-        p.add_argument("--aliases", default=os.path.join(HERE, "remedy_aliases.csv"))
-        p.add_argument("--master", default=os.path.join(HERE, "remedy_master.csv"))
-        p.add_argument("--indent", action="store_true")
-    a = ap.parse_args()
-    P.COMPACT = not a.indent
-    {"fever": cmd_fever, "bryant": cmd_bryant, "gentry": cmd_gentry,
-     "knerr": cmd_knerr}[a.book](a)
-
-
-if __name__ == "__main__":
-    main()
-
-
 # --------------------------------------------------------------------------- #
 # split a large book into per-chapter files + index.json (the kent-1897 layout)
 # --------------------------------------------------------------------------- #
@@ -1067,3 +1041,437 @@ def split_book(json_path, out_dir):
     with open(os.path.join(out_dir, "index.json"), "w", encoding="utf-8") as f:
         _json.dump(index, f, ensure_ascii=False, separators=(",", ":"))
     return len(chapters), out_dir
+
+
+def split_by_letter(json_path, out_dir, key_field="parent"):
+    """Split a one-section concordance into A-Z files + index.json.
+
+    Gentry is arranged by concordance keyword, so the keyword's first letter is
+    the book's own division. Used when a single file is too large to serve.
+    """
+    import json as _json
+    data = _json.load(open(json_path, encoding="utf-8"))
+    sec = data["sections"][0]
+    buckets = {}
+    for rub in sec["rubrics"]:
+        key = (rub.get(key_field) or rub.get("text") or "")[:1].upper()
+        b = key if key.isalpha() else "_"
+        buckets.setdefault(b, []).append(rub)
+    os.makedirs(out_dir, exist_ok=True)
+    chapters, total = [], 0
+    for b in sorted(buckets):
+        fname = f"{b.lower()}.json" if b != "_" else "other.json"
+        part = {"schema_version": data["schema_version"], "type": "repertory",
+                "book": data["book"],
+                "section": {"id": f"{data['book']['id']}-{fname[:-5]}",
+                            "title": f"Concordance {b}" if b != "_" else "Other",
+                            "rubrics": buckets[b]}}
+        with open(os.path.join(out_dir, fname), "w", encoding="utf-8") as f:
+            _json.dump(part, f, ensure_ascii=False, separators=(",", ":"))
+        chapters.append({"title": part["section"]["title"], "file": fname,
+                         "rubrics": len(buckets[b])})
+        total += len(buckets[b])
+    index = {"schema_version": data["schema_version"],
+             "type": "repertory_index", "book": data["book"],
+             "remedy_index": data.get("remedy_index", {}),
+             "chapters": chapters}
+    with open(os.path.join(out_dir, "index.json"), "w", encoding="utf-8") as f:
+        _json.dump(index, f, ensure_ascii=False, separators=(",", ":"))
+    return len(chapters), total
+
+
+# --------------------------------------------------------------------------- #
+# Kent -- Repertory of the Homoeopathic Materia Medica (1897), new OCR source
+# --------------------------------------------------------------------------- #
+
+KENT_TOKEN = re.compile(r"[A-Za-z][A-Za-z0-9'\-\.,:]{0,14}")
+KENT_CHAPTER_RE = re.compile(r"^([A-Z][A-Z ,'\-]{2,30})[.,;:]?$")
+
+# Kent's own chapters, in the book's order (used to tell a chapter head from an
+# all-caps rubric head like 'ANGER.')
+KENT_CHAPTERS = [
+    "Mind", "Vertigo", "Sleep", "Head", "Vision", "Hearing", "Nose", "Face",
+    "Mouth", "Teeth", "Throat", "External Throat", "Stomach", "Abdomen",
+    "Rectum", "Stool", "Bladder", "Kidneys", "Prostate Gland", "Urethra",
+    "Urine", "Genitalia", "Larynx And Trachea", "Respiration", "Cough",
+    "Expectoration", "Chest", "Back", "Extremities", "Chill", "Fever",
+    "Perspiration", "Skin", "Generalities"]
+
+
+def parse_printed_kent(src, body_start):
+    """Kent prints 'Abbrev.,  Full name.' one pair per line."""
+    raw = P.read_lines(src)
+    out, on = {}, False
+    for l in raw[:body_start]:
+        c = re.sub(r"[ \t]+", " ", clean_line(l))
+        if re.search(r"ABBREVIATIONS", c, re.I):
+            on = True
+            continue
+        if not on:
+            continue
+        m = re.match(r"^([A-Za-z][A-Za-z0-9\-]{0,12})[.,]*,? "
+                     r"([A-Z][a-z][A-Za-z .\-]{2,40})[.,]?$", c)
+        if m:
+            out.setdefault(tok_key(m.group(1)), m.group(2).strip())
+    return out
+
+
+def kent_body(src):
+    raw = P.read_lines(src)
+    # body starts at the first all-caps chapter head that follows the
+    # abbreviation list
+    last_abbrev = 0
+    for i, l in enumerate(raw):
+        if re.search(r"ABBREVIATIONS", clean_line(l), re.I):
+            last_abbrev = i
+    start = None
+    for i, l in enumerate(raw):
+        if i <= last_abbrev:
+            continue
+        c = clean_line(l)
+        if KENT_CHAPTER_RE.match(strip_page_no(c).strip()) and len(c.split()) == 1:
+            start = i
+            break
+    return raw, (start if start is not None else last_abbrev), last_abbrev
+
+
+def parse_kent(a):
+    raw, start, last_abbrev = kent_body(a.src)
+    printed = parse_printed_kent(a.src, last_abbrev + 1)
+    res = Resolver(printed, load_master([a.master, a.aliases]))
+
+    sections, seen, cur = [], {}, None
+    for l in raw[start:]:
+        c = clean_line(l)
+        if not c or re.fullmatch(r"[\d\W]{0,4}", c):
+            continue
+        s = strip_page_no(c).strip()
+        m = KENT_CHAPTER_RE.match(s)
+        if m and len(s.split()) <= 4 and s == s.upper() and not s.endswith(":"):
+            cand = heading_title(m.group(1))
+            title = P.snap_to_contents(cand, KENT_CHAPTERS)
+            if tok_key(title) not in {tok_key(t) for t in KENT_CHAPTERS}:
+                continue                      # an all-caps rubric head, not a chapter
+            if title and not any(P.same_section(title, t) for t in seen):
+                seen[title] = 1
+                cur = {"id": f"{a.slug}-s{len(sections)+1}", "title": title,
+                       "rubrics": [], "lines": []}
+                sections.append(cur)
+            continue
+        if cur is None:
+            continue
+        cur["lines"].append(c)
+
+    n = 0
+    for sec in sections:
+        text = " ".join(sec.pop("lines"))
+        text = re.sub(r"(\w)- (\w)", r"\1\2", text)
+        text = re.sub(r"\s+", " ", text)
+        toks = KENT_TOKEN.findall(text)
+        i, parent = 0, ""
+        while i < len(toks):
+            head, rems, is_caps = [], [], False
+            while i < len(toks):
+                t = toks[i]
+                i += 1
+                head.append(t)
+                if t.endswith(":"):
+                    break
+            if not head or not head[-1].endswith(":"):
+                break
+            htxt = " ".join(head)[:-1].strip(" .,;")
+            is_caps = bool(htxt) and htxt.upper() == htxt and len(htxt) > 2
+            while i < len(toks):
+                t = toks[i]
+                core = t.rstrip(".,;:")
+                if len(core) < 2:
+                    i += 1
+                    continue
+                if kent_is_remedy(core, res):
+                    rems.append(core)
+                    i += 1
+                else:
+                    break
+            if not htxt:
+                continue
+            n += 1
+            sec["rubrics"].append({
+                "id": f"{a.slug}-r{n:05d}", "text": htxt,
+                "parent": None if is_caps else (parent or None),
+                "remedies": [remedy_entry(t, res) for t in rems]})
+            if is_caps:
+                parent = htxt
+    return sections, raw, {}, res
+
+
+def kent_is_remedy(core, res):
+    k = tok_key(core)
+    if k in res.keys:
+        return True
+    if len(k) < 3:
+        return False
+    if len(k) >= 4 and res.close(k) is not None:
+        return True
+    return False
+
+
+def cmd_kent(a):
+    sections, raw, _, res = parse_kent(a)
+    finish(a, sections, raw, notes={"printed abbreviations": len(res.keys)})
+
+
+# --------------------------------------------------------------------------- #
+# Kimball -- Repertory of Gonorrhoea (1888)
+# --------------------------------------------------------------------------- #
+
+KIM_HEAD = re.compile(r"^([A-Z][A-Za-z' ,()\-]{2,60})\.$")
+
+
+def kimball_lines(src):
+    raw = P.read_lines(src)
+    start = 0
+    for i, l in enumerate(raw):
+        if re.search(r"REPERTORY OF GONORRHOEA", clean_line(l), re.I):
+            start = i
+    # the body proper begins at the first mixed-case heading followed by entries
+    for i, l in enumerate(raw):
+        if i > start and KIM_HEAD.match(clean_line(l)) and i + 3 < len(raw):
+            if ":" in clean_line(raw[i + 1]) or ":" in clean_line(raw[i + 2]):
+                start = i
+                break
+    out = []
+    for l in raw[start:]:
+        c = clean_line(l)
+        if not c or re.fullmatch(r"[\d\W]{0,4}", c):
+            continue
+        out.append(c)
+    return out, raw
+
+
+def parse_kimball(a):
+    lines, raw = kimball_lines(a.src)
+    master = load_master([a.master, a.aliases])
+    res = Resolver({}, master)
+    res.has = lambda tok: tok_key(tok) in res.keys or (
+        len(tok_key(tok)) >= 4 and res.close(tok_key(tok)) is not None)
+
+    sec = {"id": f"{a.slug}-s1", "title": "General", "rubrics": []}
+    n, parent = 0, ""
+    cur_text = None
+
+    def emit(text, run):
+        nonlocal n, parent
+        txt = re.sub(r"\s+", " ", text).strip(" .,;:")
+        toks = leading_remedies(run, res) if run else []
+        if not txt:
+            return
+        is_sub = bool(re.match(r"^[\u2014\u2013,-]", txt))
+        frag = re.sub(r"^[\u2014\u2013-]+[\s,]*", "", txt) if is_sub else txt
+        if not frag:
+            return
+        n += 1
+        sec["rubrics"].append({
+            "id": f"{a.slug}-r{n:05d}", "text": frag,
+            "parent": (parent or None) if is_sub else None,
+            "remedies": [remedy_entry(t, res) for t in toks]})
+        if not is_sub:
+            parent = frag
+
+    for line in lines:
+        m = re.match(r"^(.*?):\s*(.*)$", line)
+        if m:
+            if cur_text is not None:
+                emit(cur_text, "")
+            cur_text = m.group(1).strip()
+            run = m.group(2).strip()
+            toks = leading_remedies(run, res) if run else []
+            if toks or run == "":
+                emit(cur_text, run)
+                cur_text = None
+            continue
+        if cur_text is not None:
+            lead, toks = tail_remedies(line, res)
+            if toks:
+                emit((cur_text + " " + lead).strip(), " ".join(toks))
+                cur_text = None
+                continue
+            cur_text = (cur_text + " " + line).strip()
+        elif KIM_HEAD.match(line) and len(line.split()) <= 8:
+            parent = line.rstrip(".")
+        else:
+            cur_text = line
+    if cur_text:
+        emit(cur_text, "")
+    return [sec], raw, {}, res
+
+
+def cmd_kimball(a):
+    sections, raw, _, res = parse_kimball(a)
+    finish(a, sections, raw, notes={"remedy keys available": len(res.keys)})
+
+
+# --------------------------------------------------------------------------- #
+# Worcester -- Repertory to the Modalities (1880)
+# --------------------------------------------------------------------------- #
+
+WORC_CHAP = re.compile(r"^(?:[A-Z]{1,4}\s+)?([A-Z][A-Z '\-]{3,40})[.,]?\s*(?:\d{1,3})?$")
+
+
+def parse_worcester(a):
+    raw = P.read_lines(a.src)
+    start = 0
+    for i, l in enumerate(raw):
+        if re.search(r"REPERTORY TO THE MODALITIES", clean_line(l), re.I):
+            start = i
+    res = Resolver({}, load_master([a.master, a.aliases]), caps_only=True)
+    res.has = lambda tok: tok_key(tok) in res.keys or (
+        tok.strip().endswith(".") and len(tok_key(tok)) >= 4
+        and res.close(tok_key(tok)) is not None)
+
+    sections, seen, cur = [], set(), None
+    n, carry = 0, ""
+    for l in raw[start:]:
+        c = clean_line(l)
+        if not c or re.fullmatch(r"[\d\W]{0,4}", c):
+            continue
+        m = WORC_CHAP.match(strip_page_no(c).strip())
+        if m and c == c.upper() and 2 <= len(c.split()) <= 8:
+            title = heading_title(m.group(1))
+            if title and not any(P.same_section(title, t) for t in seen):
+                seen.add(title)
+                cur = {"id": f"{a.slug}-s{len(sections)+1}", "title": title,
+                       "rubrics": []}
+                sections.append(cur)
+                carry = ""
+            continue
+        if cur is None:
+            continue
+        lead, toks = tail_remedies(c, res)
+        if toks:
+            txt = re.sub(r"\s+", " ", (carry + " " + lead)).strip(" .,;:")
+            carry = ""
+            if txt:
+                n += 1
+                cur["rubrics"].append({
+                    "id": f"{a.slug}-r{n:05d}", "text": txt, "parent": None,
+                    "remedies": [remedy_entry(t, res) for t in toks]})
+        else:
+            carry = (carry + " " + c).strip()
+    return sections, raw, {}, res
+
+
+def cmd_worcester(a):
+    sections, raw, _, res = parse_worcester(a)
+    finish(a, sections, raw, notes={"remedy keys available": len(res.keys)})
+
+
+# --------------------------------------------------------------------------- #
+# Boenninghausen -- Therapeutic Pocket Book (6th American ed., Allen, 1891)
+# --------------------------------------------------------------------------- #
+
+TPB_RUBRIC = re.compile(r"^([A-Z][A-Za-z' ,()\-]{2,60}?)\s*\.?\s*[\u2014\u2013-]{1,2}\s*(.+)$")
+TPB_CHAPTERS = [
+    "Mind", "Sensorium", "Head", "Eyes", "Vision", "Ears", "Hearing", "Nose",
+    "Face", "Mouth", "Teeth", "Tongue", "Throat", "Stomach", "Abdomen",
+    "Rectum", "Stool", "Bladder", "Urine", "Genitalia", "Respiration",
+    "Cough", "Chest", "Back", "Extremities", "Sleep", "Chill", "Fever",
+    "Perspiration", "Skin", "Generalities"]
+TPB_CHAP = re.compile(r"^([A-Z][A-Z ]{2,24})\.?$")
+
+
+def tpb_tokens(run, res):
+    """Boenninghausen prints remedies comma/space separated, higher grades in
+    CAPITALS; a multi-word abbreviation ('Calc  ac', 'Nat.  m.') stays whole."""
+    out = []
+    for part in re.split(r"[,;]", run):
+        toks = [t for t in part.split() if t]
+        if not toks:
+            continue
+        # re-join 'Calc' + 'ac' style two-word abbreviations
+        merged = []
+        for t in toks:
+            if merged and re.fullmatch(r"[a-z]{1,3}\.?", t) and \
+                    re.fullmatch(r"[A-Za-z]{1,6}\.?", merged[-1]):
+                merged[-1] = merged[-1] + " " + t
+            else:
+                merged.append(t)
+        for t in merged:
+            core = t.strip(" .,;:")
+            if not core or not abbrev_shaped(t):
+                continue
+            if vocab_has(res, t) or vocab_has(res, core + "."):
+                out.append((core, 3 if core.isupper() else None))
+    return out
+
+
+def parse_tpb(a):
+    raw = P.read_lines(a.src)
+    res = Resolver({}, load_master([a.master, a.aliases]))
+    res.has = lambda tok: tok_key(tok) in res.keys or (
+        len(tok_key(tok)) >= 4 and res.close(tok_key(tok)) is not None)
+
+    sections, seen, cur = [], set(), None
+    n, carry = 0, ""
+    for l in raw:
+        c = clean_line(l)
+        if not c or re.fullmatch(r"[\d\W]{0,4}", c):
+            continue
+        s = strip_page_no(c).strip()
+        m = TPB_CHAP.match(s)
+        if m and s == s.upper() and 1 <= len(s.split()) <= 3:
+            title = P.snap_to_contents(heading_title(m.group(1)), TPB_CHAPTERS)
+            if tok_key(title) not in {tok_key(t) for t in TPB_CHAPTERS}:
+                continue
+            if title and len(title) > 2 and not any(P.same_section(title, t) for t in seen):
+                seen.add(title)
+                cur = {"id": f"{a.slug}-s{len(sections)+1}", "title": title,
+                       "rubrics": []}
+                sections.append(cur)
+                carry = ""
+            continue
+        if cur is None:
+            continue
+        m = TPB_RUBRIC.match(c)
+        if m and re.search(r"[A-Za-z]\.", m.group(2)) and re.search(r"[\u2014\u2013-]", c):
+            txt = re.sub(r"\s+", " ", (carry + " " + m.group(1))).strip(" .,;:")
+            rems = tpb_tokens(m.group(2), res)
+            carry = ""
+            if txt:
+                n += 1
+                cur["rubrics"].append({
+                    "id": f"{a.slug}-r{n:05d}", "text": txt, "parent": None,
+                    "remedies": [remedy_entry(t, res, g) for t, g in rems]})
+        else:
+            carry = (carry + " " + c).strip() if len(c.split()) < 12 else ""
+    return sections, raw, {}, res
+
+
+def cmd_tpb(a):
+    sections, raw, _, res = parse_tpb(a)
+    finish(a, sections, raw, notes={"remedy keys available": len(res.keys)})
+
+
+def main():
+    ap = argparse.ArgumentParser(description="book-specific repertory grammars")
+    sub = ap.add_subparsers(dest="book", required=True)
+    for name in ("fever", "bryant", "gentry", "knerr", "kent", "tpb", "kimball", "worcester"):
+        p = sub.add_parser(name)
+        p.add_argument("--src", required=True)
+        p.add_argument("--slug", required=True)
+        p.add_argument("--title", default="")
+        p.add_argument("--author", default="")
+        p.add_argument("--year", type=int, default=None)
+        p.add_argument("--publisher", default="")
+        p.add_argument("--out", required=True)
+        p.add_argument("--qc", required=True)
+        p.add_argument("--aliases", default=os.path.join(HERE, "remedy_aliases.csv"))
+        p.add_argument("--master", default=os.path.join(HERE, "remedy_master.csv"))
+        p.add_argument("--indent", action="store_true")
+    a = ap.parse_args()
+    P.COMPACT = not a.indent
+    {"fever": cmd_fever, "bryant": cmd_bryant, "gentry": cmd_gentry,
+     "knerr": cmd_knerr, "kent": cmd_kent, "kimball": cmd_kimball, "worcester": cmd_worcester, "tpb": cmd_tpb}[a.book](a)
+
+
+if __name__ == "__main__":
+    main()
