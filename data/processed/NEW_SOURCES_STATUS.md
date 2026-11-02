@@ -31,17 +31,29 @@ OCR — and 23,809 rubrics against the 59,114 in the existing `kent-1897/` means
 this parse is currently the smaller, not the better, file. The existing Kent
 extraction (94.1% verbatim) stays in place until the new one beats it.
 
-### 2. Boenninghausen, Therapeutic Pocket Book (6th American ed., Allen, 1891)
-`TPB.TXT`, 27,022 lines.
+### 2. Boenninghausen, Therapeutic Pocket Book (6th American ed., Allen, 1891) — PUBLISHED
+`repertory/boenninghausen-pocket-book-1891.json`, 2.8 MB.
 
-Grammar: `Heading.— Rem1., Rem2., ...` with higher grades printed in capitals.
+Grammar: `Heading.— Rem1., Rem2., ...`, the separator always carrying a dash,
+with higher degrees printed in capitals and two-word abbreviations
+(`Am. carb.`, `Calc. ph.`, `Nux m.`) split across the OCR.
 
-Draft parse: 18 chapters, 2,580 rubrics, 13,160 links, 97.0% verbatim.
-**Why it is not published:** the heading/remedy boundary is not yet reliable —
-wrapped remedy-list lines are being read as new rubrics, so rubric text
-sometimes contains a remedy list and the remedy list starts from the next line.
-Needs a rule that a rubric head is a capitalised phrase with no `.` inside it,
-followed by the dash, plus continuation-list folding.
+Result: **1,323 rubrics, 38,314 remedy links, 1,208 remedy tokens (all
+resolved), 100 % verbatim, zero validation errors.**
+
+Two limits, both recorded in its QC report rather than papered over:
+
+- **One section.** The OCR merges the two columns' running heads
+  (`EXTERNAL HEAD — EYES`, `M [ND — INTELLECT`), so chapter boundaries are not
+  recoverable. The book ships as a single section and the printed sub-heading
+  (`AGGRAVATIONS`, `AMELIORATIONS`, `Internal Head`, `Glands`) is carried as each
+  rubric's `parent`, which is what the book itself uses to distinguish, say, the
+  *Walking* rubric under aggravations from the one under ameliorations. The
+  parent strings keep their OCR damage (`AGGRAVAnONS`); they are printed text,
+  not corrected.
+- **Grades only at the top degree.** The printed degree marks survive as
+  capitals, so an ALL-CAPS token is recorded as grade 3 and every other token as
+  `null`. The intermediate degrees are not distinguishable in this scan.
 
 ### 3. Kimball, A Repertory of Gonorrhoea (1888)
 Boston: Otis Clapp and Son, 1888. `KAMBAL.txt`, 8,882 lines.
