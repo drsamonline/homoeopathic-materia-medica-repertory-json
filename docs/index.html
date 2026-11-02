@@ -306,7 +306,7 @@ html.js .reveal.in{opacity:1;transform:none}
     <div class="grid g3">
       <article class="card reveal">
         <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>13 classics, one schema</h3>
-        <p>Eleven repertories plus two materia medicas &mdash; Kent, Clarke, Hering, Bryant, Pulford and more &mdash; all normalised to the same field model.</p>
+        <p>Fifteen repertories plus two materia medicas &mdash; Kent, Clarke, Hering, Bryant, Pulford and more &mdash; all normalised to the same field model.</p>
         <div class="tag">1840&ndash;1906 &middot; public domain</div>
       </article>
       <article class="card reveal">
@@ -536,18 +536,21 @@ html.js .reveal.in{opacity:1;transform:none}
             <colgroup><col style="width:56%"><col style="width:16%"><col style="width:28%"></colgroup>
             <thead><tr><th>Book</th><th>Year</th><th class="pv-num">Rubrics</th></tr></thead>
             <tbody>
-              <tr><td>Kent's Repertory</td><td>1897</td><td class="pv-num">52,447</td></tr>
-              <tr><td>Clarke's Clinical Repertory</td><td>1900</td><td class="pv-num">12,537</td></tr>
-              <tr><td>Hering's Repertory</td><td>1889</td><td class="pv-num">11,156</td></tr>
-              <tr><td>Bryant's Pocket Repertory</td><td>1900</td><td class="pv-num">8,892</td></tr>
+              <tr><td>Knerr &mdash; Repertory to Hering&rsquo;s Guiding Symptoms</td><td>1896</td><td class="pv-num">131,685</td></tr>
+              <tr><td>Kent&rsquo;s Repertory</td><td>1897</td><td class="pv-num">52,447</td></tr>
+              <tr><td>Gentry &mdash; Concordance Repertory, vol. I</td><td>1893</td><td class="pv-num">40,493</td></tr>
+              <tr><td>Clarke&rsquo;s Clinical Repertory</td><td>1904</td><td class="pv-num">12,537</td></tr>
+              <tr><td>Hering&rsquo;s Condensed Materia Medica, Repertory</td><td>1889</td><td class="pv-num">11,156</td></tr>
               <tr><td>Pulford &mdash; Rheumatism &amp; Sciatica</td><td>1898</td><td class="pv-num">7,518</td></tr>
-              <tr><td>Sensation-as-if</td><td>1890</td><td class="pv-num">2,721</td></tr>
-              <tr><td>Vilas &mdash; Eye &amp; Ear</td><td>1890</td><td class="pv-num">2,465</td></tr>
+              <tr><td>Bryant &mdash; Pocket Manual</td><td>1851</td><td class="pv-num">4,965</td></tr>
+              <tr><td>Sensations as if &mdash; Holcomb</td><td>1890</td><td class="pv-num">2,721</td></tr>
+              <tr><td>Vilas &mdash; Therapeutics of the Eye and Ear</td><td>1883</td><td class="pv-num">2,465</td></tr>
+              <tr><td>Allen &mdash; Intermittent Fever</td><td>1883</td><td class="pv-num">1,708</td></tr>
+              <tr><td>Boenninghausen &mdash; Therapeutic Pocket Book</td><td>1891</td><td class="pv-num">1,323</td></tr>
               <tr><td>Humphreys &mdash; Sexual System</td><td>1860</td><td class="pv-num">1,280</td></tr>
               <tr><td>Jahr &mdash; Symptomatology</td><td>1847</td><td class="pv-num">587</td></tr>
-              <tr><td>Lippe's Repertory</td><td>1879</td><td class="pv-num">452</td></tr>
+              <tr><td>Lippe &mdash; More Characteristic Symptoms</td><td>1879</td><td class="pv-num">452</td></tr>
               <tr><td>Drake &mdash; Foot-sweat</td><td>1894</td><td class="pv-num">84</td></tr>
-              <tr><td><b>All repertories</b></td><td>15 books</td><td class="pv-num"><b>~271,500</b></td></tr>
             </tbody>
           </table>
         </div>
@@ -636,7 +639,7 @@ console.log(mind.rubrics.length, <span class="s">"mind rubrics"</span>);</code><
         <thead><tr><th>book</th><th>author</th><th>year</th><th>size</th><th>verbatim</th><th>path</th></tr></thead>
         <tbody>
           <tr><td>Kent&rsquo;s Repertory</td><td>James Tyler Kent</td><td>1897</td><td>52,447 rubrics</td><td>94.1%</td><td><span class="s">repertory/kent-1897/index.json</span></td></tr>
-          <tr><td>Clarke&rsquo;s Clinical Repertory</td><td>John Henry Clarke</td><td>1900</td><td>12,537 rubrics</td><td>100%</td><td><span class="s">repertory/clarke-clinical-1900.json</span></td></tr>
+          <tr><td>Clarke&rsquo;s Clinical Repertory</td><td>John Henry Clarke</td><td>1904</td><td>12,537 rubrics</td><td>100%</td><td><span class="s">repertory/clarke-clinical-1900.json</span></td></tr>
           <tr><td>Hering&rsquo;s Repertory</td><td>Hom. Med. Soc. of Pennsylvania</td><td>1889</td><td>11,156 rubrics</td><td>93.7%</td><td><span class="s">repertory/hering-repertory-1889.json</span></td></tr>
           <tr><td>Knerr &mdash; Repertory to Hering&rsquo;s Guiding Symptoms</td><td>Calvin B. Knerr</td><td>1896</td><td>131,685 rubrics</td><td>99.6%</td><td><span class="s">repertory/knerr-1896/index.json</span></td></tr>
           <tr><td>Gentry &mdash; Concordance Repertory, vol. I</td><td>William D. Gentry</td><td>1893</td><td>40,493 rubrics</td><td>99.8%</td><td><span class="s">repertory/gentry-concordance-1893/index.json</span></td></tr>
@@ -645,7 +648,7 @@ console.log(mind.rubrics.length, <span class="s">"mind rubrics"</span>);</code><
           <tr><td>Allen &mdash; Intermittent Fever</td><td>William A. Allen</td><td>1883</td><td>1,708 rubrics</td><td>99.9%</td><td><span class="s">repertory/allen-intermittent-fever-1883.json</span></td></tr>
           <tr><td>Pulford &mdash; Rheumatism &amp; Sciatica</td><td>Alfred Pulford</td><td>1898</td><td>7,518 rubrics</td><td>92.6%</td><td><span class="s">repertory/pulford-rheumatism-1898.json</span></td></tr>
           <tr><td>Sensation-as-if</td><td>A. W. Holcomb</td><td>1890</td><td>2,721 rubrics</td><td>100%</td><td><span class="s">repertory/sensation-as-if-1890.json</span></td></tr>
-          <tr><td>Vilas &mdash; Eye &amp; Ear</td><td>O. H. Vilas</td><td>1890</td><td>2,465 rubrics</td><td>80.3%</td><td><span class="s">repertory/vilas-eye-ear-1890.json</span></td></tr>
+          <tr><td>Vilas &mdash; Therapeutics of the Eye and Ear</td><td>C. H. Vilas</td><td>1883</td><td>2,465 rubrics</td><td>80.3%</td><td><span class="s">repertory/vilas-eye-ear-1890.json</span></td></tr>
           <tr><td>Humphreys &mdash; Sexual System</td><td>F. Humphreys</td><td>1860</td><td>1,280 rubrics</td><td>100%</td><td><span class="s">repertory/humphreys-sexual-1860.json</span></td></tr>
           <tr><td>Jahr &mdash; Symptomatology</td><td>G. H. G. Jahr</td><td>1847</td><td>587 rubrics</td><td>100%</td><td><span class="s">repertory/jahr-repertory-1847.json</span></td></tr>
           <tr><td>Lippe&rsquo;s Repertory</td><td>Constantine Lippe</td><td>1879</td><td>452 rubrics</td><td>88.7%</td><td><span class="s">repertory/lippe-repertory-1879.json</span></td></tr>

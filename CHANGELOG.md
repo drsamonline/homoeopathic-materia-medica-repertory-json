@@ -64,3 +64,26 @@ Audit pass over the published collection (`docs/AUDIT-2026-11-02.md`).
 - Known and left alone: Kent Extremities (needs source), Hering 1889 (713
   no-remedy rubrics, 93.6% verbatim), Vilas (51% no-remedy rubrics), Jahr
   repertory (587 rubrics — rebuild from `JAHRII.XML`).
+
+## 1.1.2 — 2026-11-02
+
+- **Four volumes were shipping placeholder metadata** — `title: "x"`,
+  `author: "x"`, and a year of 1900 for all four — which is what a reader saw in
+  any catalogue built from the JSON. Each is now named from its own catalogue
+  record:
+
+  | id | title | author | year | publisher |
+  |---|---|---|---|---|
+  | `clarke-clinical-1900` | A Clinical Repertory to the Dictionary of Materia Medica | John Henry Clarke | **1904** | Homoeopathic Publishing Co., London |
+  | `lippe-repertory-1879` | Repertory to the More Characteristic Symptoms of the Materia Medica | Constantine Lippe | **1879** | Steam Press of Bedell & Brother, New York |
+  | `pulford-rheumatism-1898` | Repertory of the Symptoms of Rheumatism, Sciatica, et cetera | Alfred Pulford | **1898** | B. B. Krammes, Tiffin, Ohio |
+  | `vilas-eye-ear-1890` | Therapeutics of the Eye and Ear, with a Repertory of the Eye | C. H. Vilas | **1883** | — |
+
+  Sources: HathiTrust, Wellcome Collection and the Library of Congress for Clarke,
+  Pulford and Lippe; the NLM copy for Vilas.
+- **Years corrected.** Three of the four carried 1900 regardless of their own
+  slug. Clarke is 1904, not 1900. Vilas is 1883, not 1890 — the slug still says
+  1890, which is left in place so the file URL stays stable, and is flagged here
+  rather than silently changed.
+- **`catalog.json` regenerated**, so any reader built on it shows the real names.
+  No rubric, remedy link or id was touched — only the `book` block.
