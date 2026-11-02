@@ -632,7 +632,7 @@ def parse_bryant(a):
 
 def cmd_bryant(a):
     sections, raw, counts, vocab = parse_bryant(a)
-    finish(a, sections, raw, notes={"printed abbreviations": len(vocab.keys)})
+    finish(a, sections, raw, notes={"printed abbreviations": len(vocab.keys)}, res=vocab)
 
 
 # --------------------------------------------------------------------------- #
@@ -724,7 +724,7 @@ def parse_gentry(a):
 
 def cmd_gentry(a):
     sections, raw, counts, vocab = parse_gentry(a)
-    finish(a, sections, raw, notes={"printed abbreviations": len(vocab.keys)})
+    finish(a, sections, raw, notes={"printed abbreviations": len(vocab.keys)}, res=vocab)
 
 
 # --------------------------------------------------------------------------- #
@@ -955,7 +955,12 @@ def cmd_knerr(a):
 # emit + QC
 # --------------------------------------------------------------------------- #
 
-def finish(a, sections, raw, notes=None):
+def finish(a, sections, raw, notes=None, res=None):
+    if res is not None:
+        sections, d2, f2 = clean_rubrics(sections, res)
+        notes = dict(notes or {})
+        notes["rubrics dropped (no wording left)"] = d2
+        notes["remedy fragments folded into the previous rubric"] = f2
     # a rubric with no remedy list carries no repertory information: those are
     # cross-reference fragments ('Compare', 'Contraction') and OCR debris
     dropped = 0
@@ -1501,6 +1506,53 @@ def parse_tpb(a):
 def cmd_tpb(a):
     sections, raw, _, res = parse_tpb(a)
     finish(a, sections, raw, notes={"remedy keys available": len(res.keys)})
+
+
+# --------------------------------------------------------------------------- #
+# post-pass: remedy tokens that leaked into the rubric text
+# --------------------------------------------------------------------------- #
+
+def clean_rubrics(sections, res):
+    """Move remedy tokens that ended up inside a rubric's text back where they
+    belong, and fold rubrics whose whole text is a remedy list into the one
+    before them.
+
+    Two OCR failures put remedies in the text: a remedy list that begins a line
+    ('Paris. Laziness, with slowness of a') and a wrapped list that lost its
+    rubric ('kali-n., kreos., lach.'). Both are repaired here, without touching
+    the wording of any real symptom.
+    """
+    dropped = folded = 0
+    for sec in sections:
+        out = []
+        for rub in sec["rubrics"]:
+            txt = rub.get("text", "")
+            toks = txt.split()
+            lead, rest = [], list(toks)
+            while rest and vocab_has(res, rest[0]) and abbrev_shaped(rest[0]):
+                lead.append(rest.pop(0))
+            if lead:
+                rub["remedies"] = [remedy_entry(t.strip(" .,;:"), res) for t in lead] \
+                    + rub["remedies"]
+                txt = " ".join(rest).lstrip(" ,;.-")
+                rub["text"] = txt
+            if not txt or len(re.findall(r"[A-Za-z]{2,}", txt)) == 0:
+                dropped += 1
+                continue
+            # the whole text is a remedy list -> fold into the previous rubric
+            parts = [x for x in re.split(r"[\s,;]+", txt) if x]
+            if len(parts) >= 2 and all(vocab_has(res, x) or not abbrev_shaped(x)
+                                       for x in parts) and \
+                    sum(1 for x in parts if vocab_has(res, x)) >= 2:
+                folded += 1
+                if out:
+                    out[-1]["remedies"].extend(
+                        remedy_entry(x.strip(" .,;:"), res) for x in parts
+                        if vocab_has(res, x))
+                continue
+            out.append(rub)
+        sec["rubrics"] = out
+    return sections, dropped, folded
 
 
 def main():

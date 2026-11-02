@@ -40,3 +40,27 @@
   printed degree marks survive only as capitals, so an ALL-CAPS remedy token is
   recorded as grade 3 and every other token as `null`. Collection: 17 books,
   219,005 repertory rubrics.
+
+## 1.1.1 — 2026-11-02
+
+Audit pass over the published collection (`docs/AUDIT-2026-11-02.md`).
+
+- **Jahr's Manual:** both part files claimed the whole book's counts
+  (199 remedies / 26,734 symptoms). Each now reports its own half — 99 / 11,711
+  and 100 / 15,023.
+- **Kent:** `extremities.json` holds 6,666 rubrics, not the 13,333 the index
+  claimed, and ends mid-remedy-list — the chapter is truncated and needs a
+  rebuild. Kent's totals are corrected to **52,447 rubrics / 319,461 links**
+  (was 59,114 / 353,000).
+- **Landing page:** the rubric total had never included Kent's chapter files.
+  Corrected to **271,452 repertory rubrics, 732,616 remedy links** across 17
+  books.
+- **Gentry:** a post-pass moves remedy tokens that leaked into rubric text back
+  into the remedy list — +1,740 links (64,052 → 65,792), 31 non-symptom
+  fragments removed.
+- **Bryant:** same pass, +38 links, no rubric lost.
+- **Provenance:** `data/source_txt/SOURCES.md` records the byte size and SHA-256
+  prefix of every source text, so a verbatim claim can now be checked.
+- Known and left alone: Kent Extremities (needs source), Hering 1889 (713
+  no-remedy rubrics, 93.6% verbatim), Vilas (51% no-remedy rubrics), Jahr
+  repertory (587 rubrics — rebuild from `JAHRII.XML`).
