@@ -53,7 +53,7 @@ Audit pass over the published collection (`docs/AUDIT-2026-11-02.md`).
   rebuild. Kent's totals are corrected to **52,447 rubrics / 319,461 links**
   (was 59,114 / 353,000).
 - **Landing page:** the rubric total had never included Kent's chapter files.
-  Corrected to **271,452 repertory rubrics, 732,616 remedy links** across 17
+  Corrected to **271,421 repertory rubrics, 744,394 remedy links** across 17
   books.
 - **Gentry:** a post-pass moves remedy tokens that leaked into rubric text back
   into the remedy list — +1,740 links (64,052 → 65,792), 31 non-symptom
