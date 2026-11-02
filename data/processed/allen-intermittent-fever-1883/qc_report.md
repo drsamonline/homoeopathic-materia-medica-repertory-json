@@ -1,0 +1,14 @@
+# QC report - allen-intermittent-fever-1883
+- source: data/source_txt/FEVER.TXT
+- output: 811271
+- sections: 30
+- rubrics: 1708
+- remedy links: 9044
+- unique remedy tokens: 313
+- resolved to a canonical name: 176
+- verbatim text found in source: 1707/1708 (99.9%)
+- tail tokens seen: 431
+- accepted vocabulary: 256
+- rubrics dropped (no remedy list): 53
+- validation errors: 0 []
+- warnings: 0 []

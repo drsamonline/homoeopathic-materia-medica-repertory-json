@@ -1,0 +1,13 @@
+# QC report - gentry-concordance-1893
+- source: data/source_txt/GENTRY.TXT
+- output: 10129408
+- sections: 1
+- rubrics: 40524
+- remedy links: 64052
+- unique remedy tokens: 1013
+- resolved to a canonical name: 1013
+- verbatim text found in source: 40436/40524 (99.8%)
+- printed abbreviations: 1068
+- rubrics dropped (no remedy list): 530
+- validation errors: 0 []
+- warnings: 0 []

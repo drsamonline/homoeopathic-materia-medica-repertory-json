@@ -1,0 +1,13 @@
+# QC report - bryant-pocket-1851
+- source: data/source_txt/BRYANT.TXT
+- output: 3262026
+- sections: 1
+- rubrics: 4965
+- remedy links: 39045
+- unique remedy tokens: 963
+- resolved to a canonical name: 963
+- verbatim text found in source: 4965/4965 (100.0%)
+- printed abbreviations: 918
+- rubrics dropped (no remedy list): 1257
+- validation errors: 0 []
+- warnings: 0 []

@@ -1,0 +1,11 @@
+# QC report — hering-repertory-1889
+- source: data/source_txt/HERING_CND.TXT
+- dropped lines (page no / running heads): 287
+- sections: 11
+- rubrics: 11156
+- remedy links: 19885
+- unique remedy tokens: 1465
+- resolved via alias table: 0
+- verbatim text found in source: 10443/11156 (93.6%)
+- validation errors: 0 []
+- warnings: 0 []

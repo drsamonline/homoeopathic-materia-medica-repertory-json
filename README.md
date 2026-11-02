@@ -24,6 +24,24 @@ by Vladimir Polony (2008), a Kent-derived repertory with its own chapter structu
 own additions. It is licensed **GPL v3** as part of the OpenRep source code — not
 public domain. See the dataset README for details.
 
+## The public-domain collection
+
+16 books (1847–1906), **217,682 repertory rubrics** and 384,841 remedy links,
+every string verbatim from its source. Knerr's 1896 repertory (131,685 rubrics,
+43 chapters) and Kent's 1897 are split by chapter with an `index.json`; the rest
+are single files. Each book carries a QC report under
+`data/processed/<slug>/qc_report.md` with its verbatim-fidelity rate.
+
+Two extraction pipelines live in `pipeline/`:
+
+- `omm_pipeline.py` — the generic repertory / materia medica grammar (`':'` +
+  comma-separated remedy lists, the trailing `'. '` grammar, Jahr, Ruoff, Bell).
+- `omm_extract_extra.py` — dedicated grammars for the books that print their
+  remedy lists as a run of **space-separated** abbreviations, or that carry
+  printed degree marks: Allen 1883 (`fever`), Bryant 1851 (`bryant`), Gentry
+  1893 (`gentry`), Knerr 1896 (`knerr`). Each mode is documented at the top of
+  the file, with the source sample it was written against.
+
 ## Licensing — two licences, one per folder
 
 - **Compiled public-domain datasets** (everything except the folder below) — **CC0 1.0**.

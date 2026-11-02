@@ -1,0 +1,13 @@
+# QC report - knerr-repertory-1896
+- source: data/source_txt/HERING.TXT
+- output: 30881011
+- sections: 44
+- rubrics: 131685
+- remedy links: 203661
+- unique remedy tokens: 5775
+- resolved to a canonical name: 4695
+- verbatim text found in source: 131207/131685 (99.6%)
+- printed abbreviations: 997
+- rubrics dropped (no remedy list): 10745
+- validation errors: 0 []
+- warnings: 0 []
