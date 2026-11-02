@@ -28,8 +28,9 @@ public domain. See the dataset README for details.
 
 16 books (1847–1906), **217,682 repertory rubrics** and 384,841 remedy links,
 every string verbatim from its source. Knerr's 1896 repertory (131,685 rubrics,
-43 chapters) and Kent's 1897 are split by chapter with an `index.json`; the rest
-are single files. Each book carries a QC report under
+43 chapters) and Kent's 1897 are split by chapter with an `index.json`; Gentry's
+concordance is split A-Z by concordance keyword, 25 files plus `index.json`; the
+rest are single files. Each book carries a QC report under
 `data/processed/<slug>/qc_report.md` with its verbatim-fidelity rate.
 
 Two extraction pipelines live in `pipeline/`:
