@@ -30,3 +30,13 @@
   links. The landing page carries the new figures and the new file table.
 - Every book ships a QC report under `data/processed/<slug>/qc_report.md` with
   its verbatim rate; all five report zero validation errors.
+- **`repertory/boenninghausen-pocket-book-1891.json`** — Boenninghausen,
+  *Therapeutic Pocket Book*, sixth American edition by Timothy Field Allen
+  (1891): **1,323 rubrics**, 38,314 remedy links, 100 % verbatim, 1,208 remedy
+  tokens all resolved. Two deliberate limits, recorded in its QC report: the
+  OCR merges the two columns' running heads (`EXTERNAL HEAD — EYES`), so the
+  book ships as one section with the printed sub-heading (`AGGRAVATIONS`,
+  `AMELIORATIONS`, `Internal Head`) carried as each rubric's `parent`; and the
+  printed degree marks survive only as capitals, so an ALL-CAPS remedy token is
+  recorded as grade 3 and every other token as `null`. Collection: 17 books,
+  219,005 repertory rubrics.

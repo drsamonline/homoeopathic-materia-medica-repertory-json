@@ -1369,80 +1369,132 @@ def cmd_worcester(a):
 # Boenninghausen -- Therapeutic Pocket Book (6th American ed., Allen, 1891)
 # --------------------------------------------------------------------------- #
 
-TPB_RUBRIC = re.compile(r"^([A-Z][A-Za-z' ,()\-]{2,60}?)\s*\.?\s*[\u2014\u2013-]{1,2}\s*(.+)$")
+# 'Gentleness.— Aeon., Ambr., ...'  the separator always carries a dash, which
+# is what tells a rubric head from a wrapped remedy list.
+TPB_RUB = re.compile(r"^(?P<head>[A-Z][A-Za-z' ,()\-]{1,58}?)\s*\.?\s*[\u2014\u2013-]{1,2}\s*(?P<run>.+)$")
+TPB_CAPS = re.compile(r"^[A-Z][A-Z ,'\-]{2,24}\.?$")
+
 TPB_CHAPTERS = [
     "Mind", "Sensorium", "Head", "Eyes", "Vision", "Ears", "Hearing", "Nose",
     "Face", "Mouth", "Teeth", "Tongue", "Throat", "Stomach", "Abdomen",
-    "Rectum", "Stool", "Bladder", "Urine", "Genitalia", "Respiration",
+    "Rectum", "Stool", "Bladder", "Urine", "Genitals", "Respiration",
     "Cough", "Chest", "Back", "Extremities", "Sleep", "Chill", "Fever",
-    "Perspiration", "Skin", "Generalities"]
-TPB_CHAP = re.compile(r"^([A-Z][A-Z ]{2,24})\.?$")
+    "Perspiration", "Skin", "Generalities", "Relationships Of Remedies"]
 
 
-def tpb_tokens(run, res):
-    """Boenninghausen prints remedies comma/space separated, higher grades in
-    CAPITALS; a multi-word abbreviation ('Calc  ac', 'Nat.  m.') stays whole."""
-    out = []
-    for part in re.split(r"[,;]", run):
-        toks = [t for t in part.split() if t]
+TPB_JUNK = re.compile(r"[^A-Za-z0-9.\- ]")
+
+
+def tpb_is_remedy(tok, res):
+    core = tok.strip(" .,;:")
+    if not core or len(core) < 2 or TPB_JUNK.search(core):
+        return False
+    if not (tok.strip().endswith(".") or core.isupper() or "." in tok.strip()):
+        return False
+    k = tok_key(core)
+    if k in res.keys:
+        return True
+    if len(k) >= 4 and res.close(k) is not None:
+        return True
+    if len(k) >= 3:
+        hits = [c for c in res.keys if c.startswith(k)]
+        if len(hits) == 1:
+            return True
+    return False
+
+
+def tpb_run(run, res):
+    """Split a printed remedy list into (token, grade) pairs.
+
+    Boenninghausen's higher degrees are printed in capitals; the OCR preserves
+    that, so an ALL-CAPS token is recorded as grade 3 and everything else as
+    null. Two-word abbreviations ('Am. carb.', 'Calc. ph.', 'Nux m.') are
+    re-joined from the split parts.
+    """
+    parts = [p.strip() for p in re.split(r"[,;]", run) if p.strip()]
+    merged = []
+    for p in parts:
+        toks = p.split()
         if not toks:
             continue
-        # re-join 'Calc' + 'ac' style two-word abbreviations
-        merged = []
-        for t in toks:
-            if merged and re.fullmatch(r"[a-z]{1,3}\.?", t) and \
-                    re.fullmatch(r"[A-Za-z]{1,6}\.?", merged[-1]):
-                merged[-1] = merged[-1] + " " + t
-            else:
-                merged.append(t)
-        for t in merged:
-            core = t.strip(" .,;:")
-            if not core or not abbrev_shaped(t):
-                continue
-            if vocab_has(res, t) or vocab_has(res, core + "."):
-                out.append((core, 3 if core.isupper() else None))
+        if merged and re.fullmatch(r"[a-z]{1,3}\.?", toks[0]) and \
+                re.fullmatch(r"[A-Za-z]{1,5}\.?", merged[-1].split()[-1]):
+            merged[-1] = merged[-1] + " " + toks[0]
+            merged.extend(toks[1:])
+        else:
+            merged.extend(toks)
+    out = []
+    for t in merged:
+        core = t.strip(" .,;:")
+        if not core:
+            continue
+        if tpb_is_remedy(t, res):
+            out.append((core, 3 if core.isupper() and len(core) > 3 else None))
     return out
 
 
 def parse_tpb(a):
     raw = P.read_lines(a.src)
     res = Resolver({}, load_master([a.master, a.aliases]))
-    res.has = lambda tok: tok_key(tok) in res.keys or (
-        len(tok_key(tok)) >= 4 and res.close(tok_key(tok)) is not None)
 
-    sections, seen, cur = [], set(), None
-    n, carry = 0, ""
+    sections = [{"id": f"{a.slug}-s1", "title": "General", "rubrics": []}]
+    cur = sections[0]
+    n, parent, pending = 0, "", None
+
+    def flush():
+        nonlocal n, pending
+        if pending is None:
+            return
+        head, rems = pending
+        pending = None
+        if cur is None or not head:
+            return
+        n += 1
+        cur["rubrics"].append({
+            "id": f"{a.slug}-r{n:05d}", "text": head,
+            "parent": parent or None,
+            "remedies": [remedy_entry(t, res, g) for t, g in rems]})
+
     for l in raw:
         c = clean_line(l)
-        if not c or re.fullmatch(r"[\d\W]{0,4}", c):
+        if not c or re.fullmatch(r"[\d\W]{0,5}", c):
             continue
         s = strip_page_no(c).strip()
-        m = TPB_CHAP.match(s)
-        if m and s == s.upper() and 1 <= len(s.split()) <= 3:
-            title = P.snap_to_contents(heading_title(m.group(1)), TPB_CHAPTERS)
-            if tok_key(title) not in {tok_key(t) for t in TPB_CHAPTERS}:
+        if n > 500 and re.search(r"RELATIONSHIPS\s+OF\s+REMEDIES", s, re.I):
+            break                          # the closing relationship tables
+        if re.search(r"[\[\]|]", s):
+            continue                       # OCR'd running head ('M [ND — INTELLECT.')
+        # This OCR merges the two columns' running heads ('EXTERNAL HEAD - EYES'),
+        # so chapter boundaries are not recoverable: the book ships as one
+        # section and the printed sub-heading ('Intellect', 'Internal Head')
+        # is carried as each rubric's parent instead.
+        if TPB_CAPS.match(s) and s == s.upper():
+            continue
+        m = TPB_RUB.match(c)
+        if m:
+            rems = tpb_run(m.group("run"), res)
+            if rems:
+                flush()
+                pending = (m.group("head").strip(" .,;:"), rems)
                 continue
-            if title and len(title) > 2 and not any(P.same_section(title, t) for t in seen):
-                seen.add(title)
-                cur = {"id": f"{a.slug}-s{len(sections)+1}", "title": title,
-                       "rubrics": []}
-                sections.append(cur)
-                carry = ""
+        # a continuation line is a bare remedy list: every token must resolve
+        rems = tpb_run(c, res)
+        all_toks = [t for t in re.split(r"[\s,;]+", c) if t]
+        if pending and rems and len(rems) >= 2 and len(rems) >= 0.5 * len(all_toks):
+            pending[1].extend(rems)
             continue
-        if cur is None:
-            continue
-        m = TPB_RUBRIC.match(c)
-        if m and re.search(r"[A-Za-z]\.", m.group(2)) and re.search(r"[\u2014\u2013-]", c):
-            txt = re.sub(r"\s+", " ", (carry + " " + m.group(1))).strip(" .,;:")
-            rems = tpb_tokens(m.group(2), res)
-            carry = ""
-            if txt:
-                n += 1
-                cur["rubrics"].append({
-                    "id": f"{a.slug}-r{n:05d}", "text": txt, "parent": None,
-                    "remedies": [remedy_entry(t, res, g) for t, g in rems]})
-        else:
-            carry = (carry + " " + c).strip() if len(c.split()) < 12 else ""
+        # otherwise a short mixed-case line may be a printed sub-heading
+        # ('Intellect.', 'Internal Head.') - never a remedy list or a cross-ref
+        words = c.rstrip(".").split()
+        if (1 <= len(words) <= 3 and c.endswith(".") and "," not in c
+                and not re.search(r"\bSee\b", c)
+                and all(w[:1].isupper() and len(w) >= 3 for w in words)
+                and all(not tpb_is_remedy(w + ".", res) for w in words)
+                and all(not any(c.startswith(tok_key(w)) for c in res.keys)
+                        for w in words)):
+            flush()
+            parent = c.rstrip(".").strip()
+    flush()
     return sections, raw, {}, res
 
 

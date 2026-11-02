@@ -1,0 +1,12 @@
+# QC report - boenninghausen-pocket-book-1891
+- source: data/source_txt/TPB.TXT
+- output: 2866122
+- sections: 1
+- rubrics: 1323
+- remedy links: 38314
+- unique remedy tokens: 1208
+- resolved to a canonical name: 1208
+- verbatim text found in source: 1323/1323 (100.0%)
+- remedy keys available: 834
+- validation errors: 0 []
+- warnings: 0 []
