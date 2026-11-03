@@ -109,6 +109,11 @@ and no remedies, so it is its own type rather than a repertory with empty fields
 ```
 
 - `sections[].n` — the paragraph number as printed (§1, §2, …).
+- `sections[].title` — **optional**, for a treatise that is chaptered rather than numbered
+  (Allen's *Chronic Miasms*, Bradford's *Life and Letters*). When present, `n` is the
+  section's ordinal position in the book and the reader shows the title instead of "§n".
+  A numbered treatise like the Organon carries `n` and no `title`.
+- `sections[].pages` — **optional**, the printed page range the section occupies.
 - `sections[].text` — the paragraph, **verbatim**. A footnote never runs into it.
 - `sections[].notes` — the footnotes printed with that paragraph, verbatim, in order.
 - `sections[].from` — `MediT` (transcription), `MediT-5th` (a fifth-edition variant block) or
