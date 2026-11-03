@@ -122,6 +122,12 @@ and no remedies, so it is its own type rather than a repertory with empty fields
 - `sections[].corroboration` — the fraction of the paragraph's 12-letter sequences found
   verbatim in the OCR scans of **the same edition**. `null` means not yet checked.
 - `book.verification` — median, minimum and the acceptance floor across the volume.
+- `book.public_domain_note` — **optional**, when the public-domain claim differs by country.
+  A bare `public_domain: true` is only used where the work is free everywhere this library
+  is likely to be read.
+- `book.copyright_jurisdictions` — **optional**, the year the term expires per country, e.g.
+  `{"IN": 1996, "GB": 2007, "US": 2028}`. A consumer must show this before republishing a
+  volume whose rights are not universal.
 
 **The two editions are separate volumes and are never merged.** They are different books:
 the fifth runs to 294 paragraphs against the sixth's 291, and 74 paragraphs are worded
