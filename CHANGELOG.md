@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-11-03 — the Organon, in two editions
+
+`treatise/` is a new type in this library: a prose work with numbered paragraphs, which a
+repertory or materia medica file cannot honestly represent.
+
+- **`organon-6th-1922.json`** — 291 paragraphs, Boericke's 1922 translation of the sixth
+  edition, with its printed footnotes.
+- **`organon-5th-1849.json`** — 294 paragraphs, Dudgeon's 1849 translation of the fifth.
+- Every paragraph carries `from` and `corroboration`, measured the same way as every other
+  book here: the fraction of its 12-letter sequences found verbatim in OCR scans of the
+  same edition. Sixth: median 0.976, minimum 0.729. Fifth: median 0.979, minimum 0.745.
+  Floor 0.60 in both; nothing was accepted below it.
+- `catalog.json` gains two entries and a `treatise_sections` total (585).
+
 ## 1.0.0 — 2026-10-25
 
 - **Licence: PolyForm Noncommercial 1.0.0.** Every repository now carries the canonical text

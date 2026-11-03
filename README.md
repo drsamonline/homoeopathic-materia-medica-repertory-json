@@ -24,6 +24,22 @@ by Vladimir Polony (2008), a Kent-derived repertory with its own chapter structu
 own additions. It is licensed **GPL v3** as part of the OpenRep source code — not
 public domain. See the dataset README for details.
 
+## The Organon, in two editions
+
+`treatise/` holds the *Organon of Medicine* as a **treatise** — numbered paragraphs, no
+rubrics, no remedies — in both public-domain English translations:
+
+| file | edition | translation | paragraphs |
+|---|---|---|---|
+| `organon-6th-1922.json` | sixth (completed 1842) | William Boericke, 1922 | 291 |
+| `organon-5th-1849.json` | fifth (1833) | R. E. Dudgeon, 1849 | 294 |
+
+Each paragraph carries its text, its printed footnotes, the source it was read from and
+the fraction of its 12-letter sequences found verbatim in OCR scans of **that edition**
+(median 0.976 for the sixth, 0.979 for the fifth; floor 0.60). The two are different
+books — 74 paragraphs are worded differently and §292–§294 exist only in the fifth — and
+they are kept as separate volumes, never merged.
+
 ## The public-domain collection
 
 16 books (1847–1906), **217,682 repertory rubrics** and 384,841 remedy links,

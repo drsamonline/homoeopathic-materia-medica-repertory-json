@@ -1,7 +1,7 @@
 # Schema
 
-Every file is self-describing: the top-level `type` is either `repertory` or
-`materia_medica`.
+Every file is self-describing: the top-level `type` is `repertory`, `materia_medica` or
+`treatise`.
 
 ## Common — `book`
 
@@ -13,7 +13,7 @@ Every file is self-describing: the top-level `type` is either `repertory` or
 | `year` | integer | year of the edition used |
 | `publisher` | string | where known, else `""` |
 | `source_file` | string | the OCR text file it was built from |
-| `counts` | object | `{ sections, rubrics, remedy_links }` or `{ remedies, symptoms }` |
+| `counts` | object | `{ sections, rubrics, remedy_links }`, `{ remedies, symptoms }` or `{ sections, notes }` |
 
 ## Repertory — `repertory/*.json`
 
@@ -82,6 +82,45 @@ Every file is self-describing: the top-level `type` is either `repertory` or
 - `symptoms[].chapter` — the labelled group the symptom belongs to (e.g.
   `Stools`, `Aggravation`), or `General`.
 - `symptoms[].text` — the symptom string, **verbatim**.
+
+## Treatise — `treatise/*.json`
+
+A prose work with numbered paragraphs — the Organon, in either edition. It has no rubrics
+and no remedies, so it is its own type rather than a repertory with empty fields.
+
+```json
+{
+  "schema_version": "1.0",
+  "type": "treatise",
+  "book": { ... , "edition": "Fifth German edition (1833), English translation 1849",
+                  "translator": "R. E. Dudgeon",
+                  "verification": { "median": 0.979, "min": 0.745, "floor": 0.6 } },
+  "sections": [
+    {
+      "id": "organon-5th-1849-s1",
+      "n": 1,
+      "text": "The physician's high and only mission is to restore the sick to health, to cure, as it is termed.",
+      "notes": ["1 His mission is not, however, to construct so-called systems..."],
+      "from": "MediT-shared",
+      "corroboration": 1.0
+    }
+  ]
+}
+```
+
+- `sections[].n` — the paragraph number as printed (§1, §2, …).
+- `sections[].text` — the paragraph, **verbatim**. A footnote never runs into it.
+- `sections[].notes` — the footnotes printed with that paragraph, verbatim, in order.
+- `sections[].from` — `MediT` (transcription), `MediT-5th` (a fifth-edition variant block) or
+  `MediT-shared` (a heading the page prints without an edition label, because the text is
+  the same in both).
+- `sections[].corroboration` — the fraction of the paragraph's 12-letter sequences found
+  verbatim in the OCR scans of **the same edition**. `null` means not yet checked.
+- `book.verification` — median, minimum and the acceptance floor across the volume.
+
+**The two editions are separate volumes and are never merged.** They are different books:
+the fifth runs to 294 paragraphs against the sixth's 291, and 74 paragraphs are worded
+differently. A consumer must show which edition it is reading, never blend the two.
 
 ## Rules
 
