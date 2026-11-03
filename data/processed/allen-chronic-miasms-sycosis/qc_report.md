@@ -5,7 +5,7 @@
 | Source | `allen-chronic-miasms-sycosis` — the digital text layer of the scan (426 pages) |
 | Chapters | 23 |
 | Words | 101,948 |
-| Licence of the TEXT | Public domain — Allen died in 1900; a US printing of this date is out of copyright |
+| Licence of the TEXT | Public domain — Allen died 1 August 1925; first published 1908, so the US copyright expired in 2004 |
 
 ## Structure
 
@@ -62,6 +62,10 @@ No sentence was rewritten. Nothing was summarised.
   this is what the scan's own text layer says, not that two scans agree.
 - **The scan's OCR damage is carried through**, not corrected: "sycOSIS", "thereapeutic",
   "sub ject" and similar. Correcting them would be rewriting.
-- **The printing is undated.** The text cites a case dated 1906; the year is recorded as
-  1906 on that basis and flagged in the book record.
+- **The printing is undated.** The work was first published in 1908; this printing's text
+  cites a case dated 1906, so it is the 1908 edition or a later printing. The year is
+  recorded as 1908 on that basis and the caveat is kept in the book record.
+- **A correction.** An earlier version of this record said Allen died in 1900. He died on
+  1 August 1925; the public-domain claim is unchanged, since the US term on a 1908
+  publication ran out in 2004.
 - 0 chapter(s) skipped after clipping.
