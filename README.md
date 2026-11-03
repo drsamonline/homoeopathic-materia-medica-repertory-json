@@ -42,7 +42,9 @@ they are kept as separate volumes, never merged.
 
 ## The public-domain collection
 
-16 books (1847–1906), **217,682 repertory rubrics** and 384,841 remedy links,
+**23 volumes in 24 files (1847–1922)** — 15 repertories, 4 materia medicas and 5
+treatises: **271,421 repertory rubrics**, 744,394 remedy links, 35,246 materia medica
+symptoms and 703 sections of prose,
 every string verbatim from its source. Knerr's 1896 repertory (131,685 rubrics,
 43 chapters) and Kent's 1897 are split by chapter with an `index.json`; Gentry's
 concordance is split A-Z by concordance keyword, 25 files plus `index.json`; the
