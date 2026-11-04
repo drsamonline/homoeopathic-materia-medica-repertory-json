@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Homoeopathic Materia Medica &amp; Repertory — JSON">
 <meta property="og:title" content="Homoeopathic Materia Medica &amp; Repertory — JSON Dataset">
-<meta property="og:description" content="Open-domain classical homoeopathy, compiled into clean, app-ready JSON. ~271k rubrics across 17 books, verbatim and CC0 1.0.">
+<meta property="og:description" content="Open-domain classical homoeopathy, compiled into clean, app-ready JSON. 307,998 rubrics across 54 books, verbatim and CC0 1.0.">
 <meta property="og:url" content="https://drsamonline.github.io/homoeopathic-materia-medica-repertory-json/">
 <meta property="og:image" content="https://socialify.git.ci/drsamonline/homoeopathic-materia-medica-repertory-json/image?name=1&amp;owner=1&amp;description=1&amp;language=1&amp;theme=Dark&amp;font=Inter">
 <meta property="og:image:width" content="1280">
@@ -25,7 +25,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Homoeopathic Materia Medica &amp; Repertory — JSON Dataset">
-<meta name="twitter:description" content="Open-domain classical homoeopathy, compiled into clean, app-ready JSON. ~271k rubrics across 17 books, verbatim and CC0 1.0.">
+<meta name="twitter:description" content="Open-domain classical homoeopathy, compiled into clean, app-ready JSON. 307,998 rubrics across 54 books, verbatim and CC0 1.0.">
 <meta name="twitter:image" content="https://socialify.git.ci/drsamonline/homoeopathic-materia-medica-repertory-json/image?name=1&amp;owner=1&amp;description=1&amp;language=1&amp;theme=Dark&amp;font=Inter">
 
 <script type="application/ld+json">
@@ -33,7 +33,7 @@
   "@context": "https://schema.org",
   "@type": "Dataset",
   "name": "Homoeopathic Materia Medica & Repertory — JSON",
-  "description": "A curated collection of 17 public-domain homoeopathic Materia Medica and Repertory classics (1847–1906), extracted from scanned page images into structured, verbatim JSON with ~271,000 rubrics. Fields are self-describing via a top-level type of repertory or materia_medica.",
+  "description": "A curated collection of 54 public-domain homoeopathic Materia Medica, Repertory and treatise volumes (1847–1932), extracted from scanned page images into structured, verbatim JSON with 307,998 rubrics and 1,359,069 remedy links. Fields are self-describing via a top-level type of repertory or materia_medica.",
   "url": "https://drsamonline.github.io/homoeopathic-materia-medica-repertory-json/",
   "sameAs": "https://github.com/drsamonline/homoeopathic-materia-medica-repertory-json",
   "identifier": "homoeopathic-materia-medica-repertory-json",
@@ -284,7 +284,7 @@ html.js .reveal.in{opacity:1;transform:none}
   <div class="wrap">
     <span class="eyebrow"><span class="dot"></span> dataset &middot; schema v1.0 &middot; public domain</span>
     <h1>homoeopathic materia medica &amp; repertory,<br>as clean JSON<span class="cursor">_</span></h1>
-    <p class="pitch">Open-domain classical homoeopathy, compiled into clean, app-ready JSON. <b>13</b> public-domain Materia Medica and Repertory classics (1840&ndash;1906), extracted from their scanned page images into structured, self-describing JSON.</p>
+    <p class="pitch">Open-domain classical homoeopathy, compiled into clean, app-ready JSON. <b id="nBooks2">54</b> public-domain Materia Medica, Repertory and treatise volumes (<span id="nYears">1847&ndash;1932</span>), extracted from their scanned page images into structured, self-describing JSON.</p>
     <p class="sub">Every remedy and rubric string is kept <b>verbatim</b> from the source &mdash; nothing invented, paraphrased or filled in. Unknown fields are <b>null</b>, never a guess.</p>
     <div class="cta">
       <a class="btn primary" href="#get-started">
@@ -299,11 +299,11 @@ html.js .reveal.in{opacity:1;transform:none}
 
     <div class="badges">
       <img src="https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg" alt="License CC0 1.0" onerror="this.style.display='none'">
-      <img src="https://img.shields.io/badge/books-17-blue.svg" alt="17 books" onerror="this.style.display='none'">
-      <img src="https://img.shields.io/badge/rubrics-~271k-green.svg" alt="~271k rubrics" onerror="this.style.display='none'">
+      <img src="https://img.shields.io/badge/books-54-blue.svg" alt="54 books" onerror="this.style.display='none'">
+      <img src="https://img.shields.io/badge/rubrics-307,998-green.svg" alt="307,998 rubrics" onerror="this.style.display='none'">
       <img src="https://img.shields.io/badge/format-JSON-orange.svg" alt="JSON format" onerror="this.style.display='none'">
-      <span class="cbadge blue"><span class="k">books</span><b>17</b></span>
-      <span class="cbadge"><span class="k">rubrics</span><b>~271k</b></span>
+      <span class="cbadge blue"><span class="k">books</span><b id="nBooks">54</b></span>
+      <span class="cbadge"><span class="k">rubrics</span><b id="nRubrics">307,998</b></span>
       <span class="cbadge amber"><span class="k">schema</span><b>1.0</b></span>
       <span class="cbadge violet"><span class="k">licence</span><b>CC0-1.0</b></span>
       <span class="cbadge"><span class="k">format</span><b>JSON</b></span>
@@ -319,9 +319,9 @@ html.js .reveal.in{opacity:1;transform:none}
     <p class="lead">Two shapes, both self-describing via a top-level <span class="s">&quot;type&quot;</span> field &mdash; one for repertories (rubric &rarr; remedies) and one for materia medica (remedy &rarr; symptoms).</p>
     <div class="grid g3">
       <article class="card reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>13 classics, one schema</h3>
-        <p>Fifteen repertories plus two materia medicas &mdash; Kent, Clarke, Hering, Bryant, Pulford and more &mdash; all normalised to the same field model.</p>
-        <div class="tag">1840&ndash;1906 &middot; public domain</div>
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>54 volumes, one schema</h3>
+        <p><span id="nTypes">Sixteen repertories, six materia medicas and thirty-two treatises</span> &mdash; Knerr, Kent, Clarke, Hering, Boericke, Hahnemann, Hering's <i>Guiding Symptoms</i> and more &mdash; all normalised to the same field model.</p>
+        <div class="tag">1847&ndash;1932 &middot; public domain</div>
       </article>
       <article class="card reveal">
         <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 12 2 2 4-4"/><path d="M12 2 4 6v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V6z"/></svg>Verbatim &amp; honest</h3>
@@ -329,8 +329,8 @@ html.js .reveal.in{opacity:1;transform:none}
         <div class="tag">no invention &middot; null over guess</div>
       </article>
       <article class="card reveal">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/><path d="M9 9v11"/></svg>~218k rubrics</h3>
-        <p>Knerr&rsquo;s 1896 repertory to Hering&rsquo;s Guiding Symptoms is the largest single book here &mdash; 131,685 rubrics across 43 chapters &mdash; and the whole library now totals roughly 271,000 rubrics.</p>
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/><path d="M9 9v11"/></svg>307,998 rubrics</h3>
+        <p>Knerr&rsquo;s 1896 repertory to Hering&rsquo;s Guiding Symptoms is still the largest single book here &mdash; 131,685 rubrics across 43 chapters &mdash; and the whole library now totals 307,998 rubrics and 1,359,069 remedy links, of which 751,907 carry a grade the book itself printed.</p>
         <div class="tag">knerr + kent ship split by chapter</div>
       </article>
       <article class="card reveal">
@@ -376,10 +376,14 @@ html.js .reveal.in{opacity:1;transform:none}
               </details>
               <div class="row"><span class="s">&quot;clarke-clinical-1900.json&quot;</span></div>
               <div class="row"><span class="s">&quot;hering-repertory-1889.json&quot;</span></div>
-              <div class="row"><span class="ellip">&hellip; (9 more)</span></div>
+              <div class="row"><span class="ellip">&hellip; (13 more repertories)</span></div>
               <div class="row"><span class="ckey">materia_medica/</span><span class="badge-t">remedy &#8594; symptoms</span></div>
               <div class="row"><span class="s">&quot;jahr-materia-medica-1847.json&quot;</span> <span class="ellip">(+ -2.json, part 2)</span></div>
-              <div class="row"><span class="s">&quot;bell-therapeutics-1906.json&quot;</span></div>
+              <div class="row"><span class="s">&quot;boericke-pocket-manual-1906.json&quot;</span></div>
+              <div class="row"><span class="ellip">&hellip; (4 more materia medicas)</span></div>
+              <div class="row"><span class="ckey">treatise/</span><span class="badge-t">prose, chaptered or numbered</span></div>
+              <div class="row"><span class="s">&quot;clarke-dictionary-materia-medica-v1.json&quot;</span> <span class="ellip">&middot; v2 &middot; v3</span></div>
+              <div class="row"><span class="s">&quot;hering-guiding-symptoms.json&quot;</span> <span class="ellip">&middot; lilienthal &middot; dewey &hellip; (32 volumes)</span></div>
               <div class="row"><span class="ckey">pipeline/</span><span class="badge-t">omm_pipeline.py + remedy lists</span></div>
               <div class="row"><span class="ckey">skill/omm-json-builder/</span><span class="badge-t">extraction skill</span></div>
               <div class="row"><span class="s">&quot;SCHEMA.md&quot;</span> <span class="s">&quot;CREDITS.md&quot;</span> <span class="s">&quot;CONTRIBUTING.md&quot;</span> <span class="s">&quot;LICENSE&quot;</span></div>
@@ -689,7 +693,7 @@ console.log(mind.rubrics.length, <span class="s">"mind rubrics"</span>);</code><
     <div class="faq" style="margin-top:26px">
       <details>
         <summary><span class="q">Q.</span> What exactly is in this dataset? <span class="chev">&#9656;</span></summary>
-        <div class="a">A curated collection of 13 public-domain homoeopathic Materia Medica and Repertory classics (1840&ndash;1906), extracted from their scanned page images into structured JSON ready for apps, search tools, study aids and AI projects. Eleven are repertories (rubric &rarr; remedies) and two are materia medicas (remedy &rarr; symptoms).</div>
+        <div class="a">A curated collection of 54 public-domain homoeopathic volumes (1847&ndash;1932), extracted from their scanned page images into structured JSON ready for apps, search tools, study aids and AI projects. Sixteen are repertories (rubric &rarr; remedies), six are materia medicas (remedy &rarr; symptoms) and thirty-two are treatises &mdash; prose works carried as numbered paragraphs or chapters.</div>
       </details>
       <details>
         <summary><span class="q">Q.</span> Is the text verified? <span class="chev">&#9656;</span></summary>
@@ -779,6 +783,36 @@ console.log(mind.rubrics.length, <span class="s">"mind rubrics"</span>);</code><
     window.addEventListener('resize',revealInView,{passive:true});
     window.addEventListener('load',function(){ setTimeout(revealInView,200); });
   }
+})();
+</script>
+
+<script>
+/* The dataset page reads the dataset it describes, so its figures cannot drift from
+   catalog.json. Everything below is a static fallback for no-JS or a blocked fetch. */
+(async () => {
+  const URL = "https://raw.githubusercontent.com/drsamonline/homoeopathic-materia-medica-repertory-json/main/catalog.json";
+  try {
+    const r = await fetch(URL, { cache: "no-cache" });
+    if (!r.ok) return;
+    const c = await r.json();
+    const t = c.totals || {}, books = Array.isArray(c.books) ? c.books : [];
+    const fmt = n => Number(n || 0).toLocaleString("en-US");
+    const set = (id, v) => { const el = document.getElementById(id); if (el && v != null) el.textContent = v; };
+    if (t.books) { set("nBooks", String(t.books)); set("nBooks2", String(t.books)); }
+    if (t.repertory_rubrics) set("nRubrics", fmt(t.repertory_rubrics));
+    const years = books.map(b => b.year).filter(Boolean);
+    if (years.length) set("nYears", `${Math.min(...years)}\u2013${Math.max(...years)}`);
+    const ones = ["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven",
+      "twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+    const tens = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+    const spelled = n => n < 20 ? ones[n] : (n < 100 ? tens[Math.floor(n/10)] + (n%10 ? "-"+ones[n%10] : "") : fmt(n));
+    const by = ty => books.filter(b => b.type === ty).length;
+    if (books.length) {
+      const rp = by("repertory"), mm = by("materia_medica"), tr = by("treatise");
+      const pl = (n, one, many) => n === 1 ? one : many;
+      set("nTypes", `${spelled(rp)} ${pl(rp,"repertory","repertories")}, ${spelled(mm)} ${pl(mm,"materia medica","materia medicas")} and ${spelled(tr)} ${pl(tr,"treatise","treatises")}`);
+    }
+  } catch (e) { /* keep the static fallback */ }
 })();
 </script>
 </body>
