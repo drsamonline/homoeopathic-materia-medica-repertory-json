@@ -42,24 +42,21 @@ they are kept as separate volumes, never merged.
 
 ## The public-domain collection
 
-**23 volumes in 24 files (1847–1922)** — 15 repertories, 4 materia medicas and 5
-treatises: **271,421 repertory rubrics**, 744,394 remedy links, 35,246 materia medica
-symptoms and 703 sections of prose,
-every string verbatim from its source. Knerr's 1896 repertory (131,685 rubrics,
-43 chapters) and Kent's 1897 are split by chapter with an `index.json`; Gentry's
-concordance is split A-Z by concordance keyword, 25 files plus `index.json`; the
-rest are single files. Each book carries a QC report under
+**54 volumes (1847–1922)** — 16 repertories, 6 materia medicas and 32 treatises:
+**307,998 repertory rubrics**, **1,359,069 remedy links** of which **751,907 carry a
+grade**, 39,770 materia medica symptoms and 5,325 sections of prose, every string verbatim
+from its source.
+
+Knerr's 1896 repertory (131,685 rubrics, 43 chapters) and Kent's 1897 are split by chapter
+with an `index.json`; Gentry's concordance is split A-Z by concordance keyword, 25 files
+plus `index.json`; the rest are single files. Each book carries a QC report under
 `data/processed/<slug>/qc_report.md` with its verbatim-fidelity rate.
 
-Two extraction pipelines live in `pipeline/`:
-
-- `omm_pipeline.py` — the generic repertory / materia medica grammar (`':'` +
-  comma-separated remedy lists, the trailing `'. '` grammar, Jahr, Ruoff, Bell).
-- `omm_extract_extra.py` — dedicated grammars for the books that print their
-  remedy lists as a run of **space-separated** abbreviations, or that carry
-  printed degree marks: Allen 1883 (`fever`), Bryant 1851 (`bryant`), Gentry
-  1893 (`gentry`), Knerr 1896 (`knerr`). Each mode is documented at the top of
-  the file, with the source sample it was written against.
+Two figures worth reading carefully, because they are not what they look like. **Kent's
+1897 repertory is entirely ungraded** — 59,114 rubrics and 353,000 links, every grade null
+— while the graded links come from Knerr and from Repertorium Publicum. And the totals in
+`catalog.json` were recounted from the files themselves on 2026-11-04, having previously
+omitted every split volume: remedy links were 613,588 short and rubrics 34,531 short.
 
 ## Licensing — two licences, one per folder
 
