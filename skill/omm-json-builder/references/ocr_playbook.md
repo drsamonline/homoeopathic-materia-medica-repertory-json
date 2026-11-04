@@ -146,3 +146,17 @@ These were probed and are NOT yet cleanly parseable. Notes for the next pass:
 Lesson: for these, decide the exact separator and heading rule from a raw sample
 first, then write a dedicated mode — do not force an existing mode and ship the
 scrambled result.
+
+## When the text is not the problem — go to XML
+
+Some books never parse from `_djvu.txt`: the remedy headings come out as `BTMPTOHS`,
+`STHPTOHS`, `Merc;` — the words are simply wrong, and no amount of heuristics recovers
+them. That is not an OCR-quality problem to be tuned around; it is a signal to switch
+medium. The DjVu XML of the *same scan* carries a bounding box per word, so a heading
+can be found by being taller than its page's body text instead of by being spelled
+correctly.
+
+Three volumes of Clarke's *Dictionary* were unparseable from text and straightforward
+from XML. Read `djvu_xml.md` for the method, the two coordinate formats that silently
+return empty books, and the page-boundary bug that loses 80 % of a volume's words
+while still reporting a plausible number of remedies.
