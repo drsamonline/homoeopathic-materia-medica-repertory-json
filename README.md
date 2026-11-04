@@ -43,7 +43,7 @@ they are kept as separate volumes, never merged.
 ## The public-domain collection
 
 **55 volumes (1847–1932)** — 16 repertories, 6 materia medicas and 33 treatises:
-**343,014 repertory rubrics**, **1,392,696 remedy links** of which **751,907 carry a
+**349,681 repertory rubrics**, **1,426,235 remedy links** of which **751,907 carry a
 grade**, 39,770 materia medica symptoms and 5,392 sections of prose, every string verbatim
 from its source.
 
