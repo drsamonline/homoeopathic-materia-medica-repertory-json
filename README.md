@@ -42,9 +42,9 @@ they are kept as separate volumes, never merged.
 
 ## The public-domain collection
 
-**54 volumes (1847–1922)** — 16 repertories, 6 materia medicas and 32 treatises:
+**55 volumes (1847–1932)** — 16 repertories, 6 materia medicas and 33 treatises:
 **307,998 repertory rubrics**, **1,359,069 remedy links** of which **751,907 carry a
-grade**, 39,770 materia medica symptoms and 5,325 sections of prose, every string verbatim
+grade**, 39,770 materia medica symptoms and 5,375 sections of prose, every string verbatim
 from its source.
 
 Knerr's 1896 repertory (131,685 rubrics, 43 chapters) and Kent's 1897 are split by chapter
