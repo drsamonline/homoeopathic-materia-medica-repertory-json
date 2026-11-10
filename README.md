@@ -58,6 +58,21 @@ Two figures worth reading carefully, because they are not what they look like. *
 `catalog.json` were recounted from the files themselves on 2026-11-04, having previously
 omitted every split volume: remedy links were 613,588 short and rubrics 34,531 short.
 
+<!-- support:sweep -->
+## Support
+
+One person's work: no company, no ads, no tracking, no paid tier. If it saved you an
+afternoon, a contribution keeps the next one coming — any amount, or none.
+
+| | |
+|---|---|
+| **UPI** | `drsohilboi@ybl` |
+| **Ko-fi** | [ko-fi.com/matneo](https://ko-fi.com/matneo) |
+| **PayPal** | [paypal.me/drsohilmomin](https://paypal.me/drsohilmomin?locale.x=en_GB&country.x=IN) |
+| **Books** | [the author's other work](https://www.amazon.com/stores/author/B08ZT331LY/allbooks) |
+| **Elsewhere** | [all projects](https://drsamonline.github.io/) |
+| **Email** | [sohilmomin2000@gmail.com](mailto:sohilmomin2000@gmail.com) — bugs, corrections, requests |
+
 ## Licensing — two licences, one per folder
 
 - **Compiled public-domain datasets** (everything except the folder below) — **CC0 1.0**.
