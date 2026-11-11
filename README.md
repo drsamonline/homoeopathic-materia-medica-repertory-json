@@ -4,6 +4,8 @@
 
 ## Repertorium Publicum (2008) — complete, graded
 
+
+![Screenshot](docs/shot.png)
 `repertory/repertorium-publicum-2008/` holds a **complete, fully graded** open
 repertory: **74,480 rubrics**, **735,460 remedy links**, **669 remedies**, 41 chapters.
 
